@@ -6,28 +6,21 @@ using System.Threading.Tasks;
 
 namespace PPAISismos.Entidades
 {
-    public class EstadoIO
+    public class EstadoOI
     {
         private string nombre;
-        
-        public EstadoIO(string nombre)
+
+        public EstadoOI(string nombre)
         {
             this.nombre = nombre;
         }
 
         public bool esRealizada()
-        { 
+        {
             return nombre.Equals("Realizada", StringComparison.OrdinalIgnoreCase);
         }
 
-        public string getNombre()
-        {
-            return nombre;
-        }
+        //Getters y Setters AGREGARLOS EN CASO DE SER UN METODO ESPECIFICO QUE SE USE EN EL DIAGRAMA DE SECUENCIA
 
-        public void setNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
     }
 }

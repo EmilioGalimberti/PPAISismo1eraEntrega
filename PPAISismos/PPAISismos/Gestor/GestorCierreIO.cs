@@ -19,5 +19,12 @@ namespace PPAISismos.Gestor
             this.pantallaCierreOI = pantalla;
         }
 
+        public void cerrarOI()
+        {
+            obtenerEmpleado();
+        }
+        public void obtenerEmpleado()
+        {
+        }
     }
 }

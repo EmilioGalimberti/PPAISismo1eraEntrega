@@ -32,6 +32,7 @@ namespace PPAISismos.Interfaces
         private void habilitarPantalla() {             
             //creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
             gestor = new GestorCierreIO(this);
+            gestor.cerrarOI();
         }
 
         private void PantallaCierreOI_Load(object sender, EventArgs e)

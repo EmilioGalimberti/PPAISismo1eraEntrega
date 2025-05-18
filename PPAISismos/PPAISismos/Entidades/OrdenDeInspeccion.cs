@@ -16,21 +16,21 @@ namespace PPAISismos.Entidades
         //OI->1 EstadoOI
         private EstadoOI estadoOI;
 
-        private DateTime fechaHoraCierre;
+        private DateTime? fechaHoraCierre;
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFinalizacion;
         private int numeroOrden;
         private string observacionCierre;
 
         //Constructor
-        public OrdenDeInspeccion(Empleado empleado,EstacionSismologica estacionSismologica,EstadoOI estadoOI,DateTime fechaHoraCierre,DateTime fechaHoraInicio,DateTime fechaHoraRealizacion,int numeroOrden,string observacionCierre)
+        public OrdenDeInspeccion(Empleado empleado,EstacionSismologica estacionSismologica,EstadoOI estadoOI,DateTime? fechaHoraCierre,DateTime fechaHoraInicio,DateTime fechaHoraFinalizacion,int numeroOrden,string observacionCierre)
         {
             this.empleado = empleado;
             this.estacionSismologica = estacionSismologica;
             this.estadoOI = estadoOI;
             this.fechaHoraCierre = fechaHoraCierre;
             this.fechaHoraInicio = fechaHoraInicio;
-            this.fechaHoraFinalizacion = fechaHoraRealizacion;
+            this.fechaHoraFinalizacion = fechaHoraFinalizacion;
             this.numeroOrden = numeroOrden;
             this.observacionCierre = observacionCierre;
         }

@@ -26,7 +26,7 @@ namespace PPAISismos.Entidades
         //SOLO PARA PROBAR que la sesion tiene este empleado
         //public string getNombre()
         //{
-        //    return nombre;
+        //   return nombre;
         //}
 
     }

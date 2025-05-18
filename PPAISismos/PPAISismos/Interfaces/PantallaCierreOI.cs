@@ -27,13 +27,12 @@ namespace PPAISismos.Interfaces
         private void seleccionOpcionCerrarOI()
         {
             InitializeComponent();
-            Sesion sesion = Data.Data.loadSesion();
-            habilitarPantalla(sesion);
+            habilitarPantalla();
         }
 
-        private void habilitarPantalla(Sesion sesion) {             
+        private void habilitarPantalla() {             
             //creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
-            gestor = new GestorCierreIO(this,sesion);
+            gestor = new GestorCierreIO(this);
             gestor.cerrarOI();
         }
 

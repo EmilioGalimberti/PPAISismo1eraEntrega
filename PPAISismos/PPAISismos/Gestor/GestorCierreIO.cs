@@ -17,9 +17,12 @@ namespace PPAISismos.Gestor
 
 
         //Constructor
-        public GestorCierreIO(PantallaCierreOI pantalla,Sesion sesion)
+        public GestorCierreIO(PantallaCierreOI pantalla)
         {
             this.pantallaCierreOI = pantalla;
+
+            //Cargar sesion actual
+            Sesion sesion = Data.Data.loadSesion();
             this.sesionActual = sesion;
 
         }

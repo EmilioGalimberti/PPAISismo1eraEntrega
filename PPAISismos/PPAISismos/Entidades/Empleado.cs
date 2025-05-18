@@ -9,7 +9,7 @@ namespace PPAISismos.Entidades
         private string apellido { get; set; }
         private string mail { get; set; }
         private int telefono { get; set; }
-        //un cliente tiene un rol
+        //Empleado ->1 Rol
         private Rol rol { get; set; }
 
         //Constructor

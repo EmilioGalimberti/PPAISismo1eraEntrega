@@ -23,6 +23,14 @@ namespace PPAISismos.Data
         public static Usuario Usuario2 { get; set; } = new Usuario("Pedrito", "1234", Emplado2);
         public static Usuario Usuario3 { get; set; } = new Usuario("Pablito", "1234", Empleado3);
 
+        //Sesion actual
+        public static DateTime fechaInicio = DateTime.Now;
+        public static DateTime fechaFin = DateTime.Now.AddHours(2);
+        public static Sesion sesionActual = new Sesion(fechaFin, fechaInicio, Usuario1);
+
+        public static Sesion loadSesion() { return sesionActual; }
+
+
 
         //EstadoOI FALTA BUSCAR EL RESTO DE LOS ESTADOS DE LA OI
         public static EstadoOI EstadoRealizada { get; set; } = new EstadoOI("Realizada");

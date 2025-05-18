@@ -16,5 +16,8 @@ namespace PPAISismos.Entidades
             this.nombre = nombre;
             this.descripcionRol = descripcionRol;
         }
+
+        public bool esResponsable() { return nombre == "ResponsableEnReparacion"; }
+
     }
 }

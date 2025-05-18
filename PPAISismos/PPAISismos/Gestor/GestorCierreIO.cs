@@ -17,9 +17,12 @@ namespace PPAISismos.Gestor
         //Lista de ordenes
         private List<OrdenDeInspeccion> ordenesDeInspeccion;
 
-        //para encontrar las oiDeEmpleado
-        private List<OrdenDeInspeccion> oiDeEmpleado { get; set; }
-
+        //para encontrar las oiDeEmpleado realizadas, mostrar IdentifciacionSismografo y  y nombre Estacion)
+        private List<(OrdenDeInspeccion, int, string)> oiDeEmpleadoRealizadasyNroSismografo { get; set; }
+        //ES de la OI
+        private EstacionSismologica estacionSismologicaOI;
+        //lista de sismografos
+        private List<Sismografo> sismografos { get; set; }
         //Constructor
         public GestorCierreIO(PantallaCierreOI pantalla)
         {
@@ -31,6 +34,8 @@ namespace PPAISismos.Gestor
 
             //cargar lista de ordenes de inspeccion
             ordenesDeInspeccion = Data.Data.loadOrdenesDeInspeccion();
+            //carga lista de sismografos
+            sismografos = Data.Data.loadSismografos();
         }
 
         public void cerrarOI()
@@ -44,11 +49,10 @@ namespace PPAISismos.Gestor
             return sesionActual.getUsuario();
         }
 
-        //A este seria mejor cambiarle el nombre ajsjas porque son las realizadas pero en mi diagrama lo tenia asi
+        //A este seria mejor cambiarle el nombre, porque son las realizadas pero en mi diagrama lo tenia asi
         public void buscarOICompletadas(Empleado empleadoLogueado)
         {
-            // a este atributo tmb hay que cambiarle el nombre oiDeEmpleadoRealizadas
-            oiDeEmpleado = new List<OrdenDeInspeccion>();
+            oiDeEmpleadoRealizadasyNroSismografo = new List<(OrdenDeInspeccion,int,string)>();
             foreach (OrdenDeInspeccion oi in ordenesDeInspeccion)
             {
                 //nose si dejarlo en un if o separarlo en dos, pero como no hacemos los
@@ -56,12 +60,22 @@ namespace PPAISismos.Gestor
                 // prefiero no seperarlo porque ahi si seria hacer dos for each
                 if (oi.esDeEmpleado(empleadoLogueado) && oi.verificarOIRealizada()) 
                 {
-                    oi.obtenerES();
-                    oiDeEmpleado.Add(oi);
-                    //Console.WriteLine(oi.getNumeroOrden());
+                    estacionSismologicaOI = oi.obtenerES();
+                    foreach (Sismografo sismografo in sismografos)
+                    {
+                        if (sismografo.esTuES(estacionSismologicaOI))
+                        {
+                            //Fijarse si logramos que en vez de tener que ir a obtener el nombre podemos devolver una tupla
+                            // con el obtenerES()
+                            oiDeEmpleadoRealizadasyNroSismografo.Add((oi, sismografo.getIdentificador(), oi.getNombreEs()));
+                        }
+                    }
+                    
                 }
             }
-
+            //FALTA ORGANIZARLAS POR FECHA DE FINALIZACION para eso darle fechas diferentes tmb en el data
+            pantallaCierreOI.solicitarSeleccionOI(oiDeEmpleadoRealizadasyNroSismografo);
+            
         }
     }
 }

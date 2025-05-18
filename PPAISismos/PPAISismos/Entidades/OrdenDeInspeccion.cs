@@ -59,5 +59,14 @@ namespace PPAISismos.Entidades
             return estacionSismologica;
         }
 
+        public string getNombreEs()
+        {
+            return estacionSismologica.getNombre();
+        }
+
+        public DateTime getFechaFinalizacion()
+        {
+            return fechaHoraFinalizacion;
+        }
     }
 }

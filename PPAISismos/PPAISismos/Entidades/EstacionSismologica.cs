@@ -27,5 +27,10 @@ namespace PPAISismos.Entidades
             this.nroCerficicacionAdquisicion = nroCerficicacionAdquisicion;
         }
 
+        public string getNombre()
+        {
+            return nombre;
+        }
+
     }
 }

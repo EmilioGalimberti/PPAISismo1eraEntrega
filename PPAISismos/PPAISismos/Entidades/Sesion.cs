@@ -11,7 +11,7 @@ namespace PPAISismos.Entidades
         //ATRIBUTOS
         private DateTime fechaFin;
         private DateTime fechaInicio;
-        private Usuario usuarioActual;
+        private Usuario usuarioLogueado;
 
         //METODOS
 
@@ -20,11 +20,11 @@ namespace PPAISismos.Entidades
         {
             this.fechaFin = fechaFin;
             this.fechaInicio = fechaInicio;
-            this.usuarioActual = usuarioActual;
+            this.usuarioLogueado = usuarioActual;
         }
 
         //--> Obtener el Empleado logueado
-        public Empleado getUsuario() { return usuarioActual.getEmpleado(); }
+        public Empleado getUsuario() { return usuarioLogueado.getEmpleado(); }
     }
 }
 

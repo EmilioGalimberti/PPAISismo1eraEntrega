@@ -25,5 +25,9 @@ namespace PPAISismos.Entidades
             this.listaCambioEstadoSismografo = listaCambioEstadoSismografo;
             this.estacionSismologica = estacionSismologica;
         }
+
+        public bool esTuES(EstacionSismologica estacionSismologicaOI) { return estacionSismologicaOI == estacionSismologica; }
+
+        public int getIdentificador() { return identificadoSismografo; }
     }
 }

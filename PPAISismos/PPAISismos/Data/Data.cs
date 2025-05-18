@@ -99,8 +99,8 @@ namespace PPAISismos.Data
 
         //SISMOGRAFOS (a todos les puse los mismos cambio de estados, se puede poner diferentes
         public static Sismografo Sismografo1 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1001, loadCambioEstadoSismografo(), Estacion1);
-        public static Sismografo Sismografo2 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1002, loadCambioEstadoSismografo(), Estacion2);
-        public static Sismografo Sismografo3 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1003, loadCambioEstadoSismografo(), Estacion3);
+        public static Sismografo Sismografo2 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 2, 1002, loadCambioEstadoSismografo(), Estacion2);
+        public static Sismografo Sismografo3 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 3, 1003, loadCambioEstadoSismografo(), Estacion3);
     
         //Lista de sismografos para cargar en el gestor
         public static List<Sismografo> loadSismografos()

@@ -28,34 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridOrdenes = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // dataGridOrdenes
             // 
-            this.button1.Location = new System.Drawing.Point(345, 209);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.dataGridOrdenes.AllowUserToAddRows = false;
+            this.dataGridOrdenes.AllowUserToDeleteRows = false;
+            this.dataGridOrdenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridOrdenes.Location = new System.Drawing.Point(12, 83);
+            this.dataGridOrdenes.Name = "dataGridOrdenes";
+            this.dataGridOrdenes.ReadOnly = true;
+            this.dataGridOrdenes.Size = new System.Drawing.Size(576, 150);
+            this.dataGridOrdenes.TabIndex = 0;
             // 
             // PantallaCierreOI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.dataGridOrdenes);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PantallaCierreOI";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.PantallaCierreOI_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridOrdenes;
     }
 }

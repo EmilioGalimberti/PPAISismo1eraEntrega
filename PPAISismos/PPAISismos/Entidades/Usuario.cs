@@ -10,6 +10,7 @@ namespace PPAISismos.Entidades
     {
         private string nombreUsuario { get; set; }
         private string contrasena { get; set; }
+        //Usuario -> 1 Empleado
         private Empleado empleado { get; set; }
 
         public Usuario(string nombreUsuario, string contrasena, Empleado empleado)

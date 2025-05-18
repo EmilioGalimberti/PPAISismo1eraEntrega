@@ -13,6 +13,8 @@ namespace PPAISismos.Data
         public static Rol ResponsableDeReparacion { get; set; } = new Rol("ResponsableEnReparacion", "descripcion");
         //buscar en el dominio mas roles este es solo de prueba:
         public static Rol ResponsableEnNada { get; set; } = new Rol("ResponsableEnNada", "descripcion2");
+        
+        
         //Clientes (nombre, apellido, mail, telefono, rol)
         public static Empleado Empleado1 { get; set; } = new Empleado("Juan", "Lopez", "mail@gmail.com", 123456789, ResponsableDeReparacion);
         public static Empleado Empleado2 { get; set; } = new Empleado("Pedro", "Picapiedra", "mail2@gmail.com", 803456789, ResponsableDeReparacion);
@@ -72,10 +74,42 @@ namespace PPAISismos.Data
             return ordenes;
         }
 
-        //EstadoSismografo, falta agregar los estados que faltan en el dominio
+        //EstadoSismografo, 
         public static EstadoSismografo EstadoFueraDeServicio { get; set; } = new EstadoSismografo("FueraDeServicio");
-        public static EstadoSismografo EstadoPrueba2 { get; set; } = new EstadoSismografo("EstadoPrueba2");
+        public static EstadoSismografo EstadoEnLinea { get; set; } = new EstadoSismografo("EnLinea");
+        public static EstadoSismografo EstadoInhabilitadoPorInspeccion { get; set; } = new EstadoSismografo("InhabilitadoPorInspeccion");
+        public static EstadoSismografo EstadoEnInstalacion{ get; set; } = new EstadoSismografo("EnInstalacion");
 
+        //Cambio de estado sismografos
+        //      DateTime? fechaHoraFin, DateTime? fechaHoraInicio, EstadoSismografo estadoSismografo)
 
+        public static CambioEstadoSismografo ce1 = new CambioEstadoSismografo(null, new DateTime(2025, 5, 5), EstadoInhabilitadoPorInspeccion);
+        public static CambioEstadoSismografo ce2 = new CambioEstadoSismografo(new DateTime(2025, 5, 5), new DateTime(2025, 4, 5), EstadoEnLinea);
+        public static CambioEstadoSismografo ce3 = new CambioEstadoSismografo(new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), EstadoEnInstalacion);
+
+        //Listas de cambio de estados para el sismografo
+        public static List<CambioEstadoSismografo> loadCambioEstadoSismografo()
+        {
+            List<CambioEstadoSismografo> listaCE = new List<CambioEstadoSismografo>();
+            listaCE.Add(ce1);
+            listaCE.Add(ce2);
+            listaCE.Add(ce3);
+            return listaCE;
+        }
+
+        //SISMOGRAFOS (a todos les puse los mismos cambio de estados, se puede poner diferentes
+        public static Sismografo Sismografo1 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1001, loadCambioEstadoSismografo(), Estacion1);
+        public static Sismografo Sismografo2 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1002, loadCambioEstadoSismografo(), Estacion2);
+        public static Sismografo Sismografo3 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1003, loadCambioEstadoSismografo(), Estacion3);
+    
+        //Lista de sismografos para cargar en el gestor
+        public static List<Sismografo> loadSismografos()
+        {
+            List<Sismografo> listaSismografos = new List<Sismografo>();
+            listaSismografos.Add(Sismografo1);
+            listaSismografos.Add(Sismografo2);
+            listaSismografos.Add(Sismografo3);
+            return listaSismografos;
+        }
     }
 }

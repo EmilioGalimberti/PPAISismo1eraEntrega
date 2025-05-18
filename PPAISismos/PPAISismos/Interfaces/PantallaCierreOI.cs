@@ -55,10 +55,10 @@ namespace PPAISismos.Interfaces
             {
                 dataGridOrdenes.Rows.Add(
                     tupla.Item1.getNumeroOrden(),
-                    tupla.Item2.getFechaFinalizacion(),
-                    tupla.Item3,
-                    tupla.Item4
-                    
+                    tupla.Item1.getFechaFinalizacion(),
+                    tupla.Item2,
+                    tupla.Item3
+
                 );
             }
         }

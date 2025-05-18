@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,10 +19,10 @@ namespace PPAISismos.Data
         
         
         // Empleados (string nombre, string apellido, string mail, int telefono, Rol rol)
-        public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "mail@gmail.com", 3510000001, ResponsableDeInspecciones);
-        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3510000002, AnalistaEnSismos);
-        public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3510000003, AnalistaSupervisor);
-        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3510000004, EncargadoDeInstalaciones);
+        public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "mail@gmail.com", 3891234 , ResponsableDeInspecciones);
+        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, AnalistaEnSismos);
+        public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
+        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, EncargadoDeInstalaciones);
 
 
         // Usuario (string nombreUsuario, string contrasena, Empleado empleado)
@@ -100,26 +101,26 @@ namespace PPAISismos.Data
         
 
         // Cambio de estado del sismógrafo (DateTime? fechaHoraFin, DateTime? fechaHoraInicio, EstadoSismografo estadoSismografo)
-        public static CambioEstadoSismografo CESismografo1 = new CambioEstadoSismografo(null, new DateTime(2025, 5, 5), InhabilitadoPorInspeccion);
-        public static CambioEstadoSismografo CESismografo2 = new CambioEstadoSismografo(new DateTime(2025, 5, 5), new DateTime(2025, 4, 5), EnLinea);
-        public static CambioEstadoSismografo CESismografo3 = new CambioEstadoSismografo(new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), EnInstalacion);
+        public static CambioEstadoSismografo ce1 = new CambioEstadoSismografo(null, new DateTime(2025, 5, 5), InhabilitadoPorInspeccion);
+        public static CambioEstadoSismografo ce2 = new CambioEstadoSismografo(new DateTime(2025, 5, 5), new DateTime(2025, 4, 5), EnLinea);
+        public static CambioEstadoSismografo ce3 = new CambioEstadoSismografo(new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), EnInstalacion);
 
 
-        // Lista de cambios de estado para el sismógrafo
-        public static List<CambioEstadoSismografo> loadCambiosDeEstadoSismografo()
+        //Listas de cambio de estados para el sismografo
+        public static List<CambioEstadoSismografo> loadCambioEstadoSismografo()
         {
-            List<CambioEstadoSismografo> listaCambiosEstadoSismografo = new List<CambioEstadoSismografo>();
-            listaCambiosEstadoSismografo.Add(CESismografo1);
-            listaCambiosEstadoSismografo.Add(CESismografo2);
-            listaCambiosEstadoSismografo.Add(CESismografo3);
-            return listaCambiosEstadoSismografo;
+            List<CambioEstadoSismografo> listaCE = new List<CambioEstadoSismografo>();
+            listaCE.Add(ce1);
+            listaCE.Add(ce2);
+            listaCE.Add(ce3);
+            return listaCE;
         }
 
 
         // Sismógrafos (a todos les puse los mismos cambios de estado, pero se pueden poner diferentes)
-        public static Sismografo Sismografo1 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1001, loadCESismografo(), Estacion1);
-        public static Sismografo Sismografo2 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 2, 1002, loadCESismografo(), Estacion2);
-        public static Sismografo Sismografo3 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 3, 1003, loadCESismografo(), Estacion3);
+        public static Sismografo Sismografo1 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 1, 1001, loadCambioEstadoSismografo(), Estacion1);
+        public static Sismografo Sismografo2 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 2, 1002, loadCambioEstadoSismografo(), Estacion2);
+        public static Sismografo Sismografo3 { get; set; } = new Sismografo(new DateTime(2022, 4, 5), 3, 1003, loadCambioEstadoSismografo(), Estacion3);
     
 
         // Lista de sismógrafos para cargar en el gestor

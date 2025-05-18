@@ -42,6 +42,7 @@
             this.dataGridOrdenes.ReadOnly = true;
             this.dataGridOrdenes.Size = new System.Drawing.Size(576, 150);
             this.dataGridOrdenes.TabIndex = 0;
+            this.dataGridOrdenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridOrdenes_CellContentClick);
             // 
             // PantallaCierreOI
             // 
@@ -50,7 +51,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.dataGridOrdenes);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PantallaCierreOI";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.PantallaCierreOI_Load);

@@ -1,6 +1,7 @@
 ﻿using PPAISismos.Entidades;
 using PPAISismos.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,7 @@ namespace PPAISismos.Gestor
         //A este seria mejor cambiarle el nombre, porque son las realizadas pero en mi diagrama lo tenia asi
         public void buscarOICompletadas(Empleado empleadoLogueado)
         {
+            
             oiDeEmpleadoRealizadasyNroSismografo = new List<(OrdenDeInspeccion,int,string)>();
             foreach (OrdenDeInspeccion oi in ordenesDeInspeccion)
             {
@@ -68,14 +70,22 @@ namespace PPAISismos.Gestor
                             //Fijarse si logramos que en vez de tener que ir a obtener el nombre podemos devolver una tupla
                             // con el obtenerES()
                             oiDeEmpleadoRealizadasyNroSismografo.Add((oi, sismografo.getIdentificador(), oi.getNombreEs()));
+                            
                         }
                     }
                     
                 }
+                oiDeEmpleadoRealizadasyNroSismografo = ordenarPorFechaFinal(oiDeEmpleadoRealizadasyNroSismografo);
             }
             //FALTA ORGANIZARLAS POR FECHA DE FINALIZACION para eso darle fechas diferentes tmb en el data
             pantallaCierreOI.solicitarSeleccionOI(oiDeEmpleadoRealizadasyNroSismografo);
             
+        }
+
+        public List<(OrdenDeInspeccion, int, string)> ordenarPorFechaFinal(List<(OrdenDeInspeccion, int, string)> lista)
+        {
+            //ordenar por fecha de finalizacion
+            return lista.OrderByDescending(x => x.Item1.getFechaFinalizacion()).ToList();
         }
     }
 }

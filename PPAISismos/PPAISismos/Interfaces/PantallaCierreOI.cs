@@ -67,5 +67,10 @@ namespace PPAISismos.Interfaces
         {
             
         }
+
+        private void dataGridOrdenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

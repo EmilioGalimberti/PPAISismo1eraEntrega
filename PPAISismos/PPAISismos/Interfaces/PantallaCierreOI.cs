@@ -70,7 +70,13 @@ namespace PPAISismos.Interfaces
 
         private void dataGridOrdenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            ordenSeleccionada(dataGridOrdenes.CurrentRow.Index);
 
+        }
+
+        private void ordenSeleccionada(int row)
+        {
+            //gestor.tomarOrdenSeleccionada()
         }
     }
 }

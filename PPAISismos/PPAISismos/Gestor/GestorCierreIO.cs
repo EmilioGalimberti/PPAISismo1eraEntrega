@@ -75,14 +75,14 @@ namespace PPAISismos.Gestor
                     }
                     
                 }
-                oiDeEmpleadoRealizadasyNroSismografo = ordenarPorFechaFinal(oiDeEmpleadoRealizadasyNroSismografo);
+                oiDeEmpleadoRealizadasyNroSismografo = ordenarOIPorFechaFinal(oiDeEmpleadoRealizadasyNroSismografo);
             }
             //FALTA ORGANIZARLAS POR FECHA DE FINALIZACION para eso darle fechas diferentes tmb en el data
             pantallaCierreOI.solicitarSeleccionOI(oiDeEmpleadoRealizadasyNroSismografo);
             
         }
 
-        public List<(OrdenDeInspeccion, int, string)> ordenarPorFechaFinal(List<(OrdenDeInspeccion, int, string)> lista)
+        public List<(OrdenDeInspeccion, int, string)> ordenarOIPorFechaFinal(List<(OrdenDeInspeccion, int, string)> lista)
         {
             //ordenar por fecha de finalizacion
             return lista.OrderByDescending(x => x.Item1.getFechaFinalizacion()).ToList();

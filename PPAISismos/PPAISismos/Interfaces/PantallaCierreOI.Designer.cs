@@ -53,7 +53,7 @@
             this.Controls.Add(this.dataGridOrdenes);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PantallaCierreOI";
-            this.Text = "Form1";
+            this.Text = "PantallaCierreOI";
             this.Load += new System.EventHandler(this.PantallaCierreOI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).EndInit();
             this.ResumeLayout(false);

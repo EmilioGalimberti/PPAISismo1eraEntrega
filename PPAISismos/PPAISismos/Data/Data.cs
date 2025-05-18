@@ -20,7 +20,7 @@ namespace PPAISismos.Data
         
         // Empleados (string nombre, string apellido, string mail, int telefono, Rol rol)
         public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "mail@gmail.com", 3891234 , ResponsableDeInspecciones);
-        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, AnalistaEnSismos);
+        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, ResponsableDeInspecciones);
         public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
         public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, EncargadoDeInstalaciones);
 

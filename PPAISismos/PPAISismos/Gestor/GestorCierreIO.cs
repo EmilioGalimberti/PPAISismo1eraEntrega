@@ -24,6 +24,9 @@ namespace PPAISismos.Gestor
         // Lista de sismógrafos
         private List<Sismografo> sismografos { get; set; }
 
+        //OI SELECCIONADA
+        private (OrdenDeInspeccion, int, string) ordenSeleccionada;
+
         // Constructor del gestor
         public GestorCierreIO(PantallaCierreOI pantalla)
         {
@@ -86,5 +89,21 @@ namespace PPAISismos.Gestor
             //ordenar por fecha de finalizacion
             return lista.OrderByDescending(x => x.Item1.getFechaFinalizacion()).ToList();
         }
+
+
+        public void tomarOrdenSeleccionada(int row) {
+
+            ordenSeleccionada = oiDeEmpleadoRealizadasyNroSismografo[row];
+
+            Console.Write("AAAAAAAAAAAAAAAAAAAAAAA");
+            // Por ejemplo:
+            Console.WriteLine($"Seleccionaste la orden N°: {ordenSeleccionada.Item1.getNumeroOrden()}");
+
+
+        }
+
+   
+   
     }
+
 }

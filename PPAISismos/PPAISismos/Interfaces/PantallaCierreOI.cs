@@ -22,6 +22,7 @@ namespace PPAISismos.Interfaces
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
+            
         }
         
         private void seleccionOpcionCerrarOI()
@@ -49,6 +50,12 @@ namespace PPAISismos.Interfaces
                 dataGridOrdenes.Columns.Add("FechaFinalizacion", "Fecha de Finalización");
                 dataGridOrdenes.Columns.Add("NombreEstacion", "Nombre de la Estación Simológica");
                 dataGridOrdenes.Columns.Add("IdentificadorSismografo", "Identificador del Sismógrafo");
+
+                // Deshabilitar el ordenamiento en los headers
+                foreach (DataGridViewColumn col in dataGridOrdenes.Columns)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
             }
 
             foreach (var tupla in lista)
@@ -56,8 +63,8 @@ namespace PPAISismos.Interfaces
                 dataGridOrdenes.Rows.Add(
                     tupla.Item1.getNumeroOrden(),
                     tupla.Item1.getFechaFinalizacion(),
-                    tupla.Item2,
-                    tupla.Item3
+                    tupla.Item3,
+                    tupla.Item2
 
                 );
             }
@@ -68,15 +75,19 @@ namespace PPAISismos.Interfaces
             
         }
 
-        private void dataGridOrdenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridOrdenes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ordenSeleccionada(dataGridOrdenes.CurrentRow.Index);
+            if (e.RowIndex >= 0) // Para evitar el header
+            {
+                ordenSeleccionada(e.RowIndex);
+            }
+            ;
 
         }
 
         private void ordenSeleccionada(int row)
         {
-            //gestor.tomarOrdenSeleccionada()
+            gestor.tomarOrdenSeleccionada(row);
         }
     }
 }

@@ -12,16 +12,16 @@ using System.Windows.Forms;
 
 namespace PPAISismos.Interfaces
 {
+    // Clase que representa la pantalla de cierre de la orden de inspección (OI)
     public partial class PantallaCierreOI : Form
     {
-        //atributos
+        // Atributos: 
         private GestorCierreIO gestor { get; set; }
         
-        //Este es el constructor no?
+        // Constructor de la pantalla
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
-
         }
         
         private void seleccionOpcionCerrarOI()
@@ -30,34 +30,34 @@ namespace PPAISismos.Interfaces
             habilitarPantalla();
         }
 
-        private void habilitarPantalla() {             
-            //creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
+        private void habilitarPantalla() {
+            // Creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
             gestor = new GestorCierreIO(this);
             gestor.cerrarOI();
         }
 
-        //Grilla para mostrar las OI
+        // Método para solicitar la selección de la OI
         public void solicitarSeleccionOI(List<(OrdenDeInspeccion, int, string)> lista)
         {
             dataGridOrdenes.Visible = true;
             dataGridOrdenes.Rows.Clear();
 
-            // Opcional: si no tienes columnas definidas en el diseñador, agrégalas así:
+            // Si no hay columnas definidas en el diseñador, las agregamos
             if (dataGridOrdenes.Columns.Count == 0)
             {
-                dataGridOrdenes.Columns.Add("NumeroOrden", "N° Orden");
-                dataGridOrdenes.Columns.Add("FechaFinalizacion", "Fecha Finalizacion");
-                dataGridOrdenes.Columns.Add("NombreEstacion", "Nombre Estación");
-                dataGridOrdenes.Columns.Add("IdentificadoSismografo", "Identificador Sismografo");
+                dataGridOrdenes.Columns.Add("NumeroOrden", "N° de Orden");
+                dataGridOrdenes.Columns.Add("FechaFinalizacion", "Fecha de Finalización");
+                dataGridOrdenes.Columns.Add("NombreEstacion", "Nombre de la Estación Simológica");
+                dataGridOrdenes.Columns.Add("IdentificadorSismografo", "Identificador del Sismógrafo");
             }
 
             foreach (var tupla in lista)
             {
                 dataGridOrdenes.Rows.Add(
                     tupla.Item1.getNumeroOrden(),
-                    tupla.Item1.getFechaFinalizacion(),
+                    tupla.Item2.getFechaFinalizacion(),
                     tupla.Item3,
-                    tupla.Item2
+                    tupla.Item4
                     
                 );
             }

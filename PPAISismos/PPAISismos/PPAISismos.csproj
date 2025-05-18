@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="Data\Data.cs" />
     <Compile Include="Entidades\Empleado.cs" />
+    <Compile Include="Entidades\EstacionSismologica.cs" />
     <Compile Include="Entidades\EstadoOI.cs" />
+    <Compile Include="Entidades\OrdenDeInspeccion.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Sesion.cs" />
     <Compile Include="Entidades\Usuario.cs" />

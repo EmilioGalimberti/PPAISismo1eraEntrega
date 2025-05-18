@@ -49,14 +49,14 @@ namespace PPAISismos.Data
         //fechaHoraFinalizacion| Cuando se completan todas las tareas de la orden
         //fechaHoraCierre      | Cuando se cierra la orden de inspección (Cierre de OI)
         //OrdenDeInspeccion(Empleado empleado,EstacionSismologica estacionSismologica,EstadoOI estadoOI,DateTime fechaHoraCierre,DateTime fechaHoraInicio,DateTime fechaHoraFinalizacion,int numeroOrden,string observacionCierre)
-        public static OrdenDeInspeccion Orden1 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, EstadoRealizada,null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion1");
-        public static OrdenDeInspeccion Orden6 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoRealizada, null , new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion6");
-        public static OrdenDeInspeccion Orden7 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion7");
-        public static OrdenDeInspeccion Orden8 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion8");
-        public static OrdenDeInspeccion Orden2 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoCerrada, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), new DateTime(2025, 4, 5), 123456789, "Observacion2");
-        public static OrdenDeInspeccion Orden3 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion3");
-        public static OrdenDeInspeccion Orden4 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion4");
-        public static OrdenDeInspeccion Orden5 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion2, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 123456789, "Observacion5");
+        public static OrdenDeInspeccion Orden1 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, EstadoRealizada,null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 1, "Observacion1");
+        public static OrdenDeInspeccion Orden2 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoRealizada, null , new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 2, "Observacion6");
+        public static OrdenDeInspeccion Orden3 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 3, "Observacion7");
+        public static OrdenDeInspeccion Orden4 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 4, "Observacion8");
+        public static OrdenDeInspeccion Orden5 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoCerrada, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), new DateTime(2025, 4, 5), 5, "Observacion2");
+        public static OrdenDeInspeccion Orden6 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 6, "Observacion3");
+        public static OrdenDeInspeccion Orden7 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 7, "Observacion4");
+        public static OrdenDeInspeccion Orden8 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion2, EstadoNada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 8, "Observacion5");
 
         //Listas de ordenes para que el gestor las recorra
         public static List<OrdenDeInspeccion> loadOrdenesDeInspeccion() {     
@@ -66,6 +66,9 @@ namespace PPAISismos.Data
             ordenes.Add(Orden3);
             ordenes.Add(Orden4);
             ordenes.Add(Orden5);
+            ordenes.Add(Orden6);
+            ordenes.Add(Orden7);
+            ordenes.Add(Orden8);
             return ordenes;
         }
         

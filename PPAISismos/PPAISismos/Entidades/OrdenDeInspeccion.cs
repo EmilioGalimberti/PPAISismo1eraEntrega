@@ -34,5 +34,24 @@ namespace PPAISismos.Entidades
             this.numeroOrden = numeroOrden;
             this.observacionCierre = observacionCierre;
         }
+
+        //Solo para probar las ordenes
+        public int getNumeroOrden()
+        {
+            return numeroOrden;       
+        }
+
+        //Para saber si tiene el puntero al empleado logueado
+        public bool esDeEmpleado(Empleado empleadoLogueado)
+        {
+            return empleado == empleadoLogueado;
+        }
+
+        //Revisar que se llame igual que en el diagrama de secuencia
+        public bool verificarOIRealizada()
+        {
+           return estadoOI.esRealizada();
+        }
+
     }
 }

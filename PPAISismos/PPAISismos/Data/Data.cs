@@ -82,7 +82,7 @@ namespace PPAISismos.Data
             ordenes.Add(Orden8);
             return ordenes;
         }
-
+        
 
         // Estados del sismógrafo (string nombre)
         public static EstadoSismografo EnEsperaDeCertificacion { get; set; } = new EstadoSismografo("EnEsperaDeCertificacion");
@@ -91,6 +91,8 @@ namespace PPAISismos.Data
         public static EstadoSismografo DeBaja { get; set; } = new EstadoSismografo("DeBaja");
         public static EstadoSismografo Disponible { get; set; } = new EstadoSismografo("Disponible");
         public static EstadoSismografo FueraDeServicio { get; set; } = new EstadoSismografo("FueraDeServicio");
+        public static EstadoSismografo HabilitadoASerIncluido{ get; set; } = new EstadoSismografo("HabilitadoASerIncluido");
+        public static EstadoSismografo IncluidoEnPlanDeConstruccion{ get; set; } = new EstadoSismografo("IncluidoEnPlanDeConstruccion");
         public static EstadoSismografo InhabilitadoPorInspeccion { get; set; } = new EstadoSismografo("InhabilitadoPorInspeccion");
         public static EstadoSismografo Reclamado { get; set; } = new EstadoSismografo("Reclamado");
         

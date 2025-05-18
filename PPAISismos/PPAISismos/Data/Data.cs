@@ -41,8 +41,13 @@ namespace PPAISismos.Data
         //EstadoOI FALTA BUSCAR EL RESTO DE LOS ESTADOS DE LA OI
         public static EstadoOI EstadoRealizada { get; set; } = new EstadoOI("Realizada");
         public static EstadoOI EstadoCerrada { get; set; } = new EstadoOI("Cerrada");
+        public static EstadoOI EstadoPendienteDeRealizacion { get; set; } = new EstadoOI("PendienteDeRealizacion");
+        public static EstadoOI EstadoParcialmenteRealizada { get; set; } = new EstadoOI("ParcialmenteRealizada");
+        public static EstadoOI EstadoCompletamenteFinalizada { get; set; } = new EstadoOI("CompletamenteFinalizada");
         //Buscar mas estados en el dominio, este es de prueba:
         public static EstadoOI EstadoNada { get; set; } = new EstadoOI("Nada");
+        
+        
 
 
         //REVISAR EL DOMINIO SOBRE LAS FECHAS, 

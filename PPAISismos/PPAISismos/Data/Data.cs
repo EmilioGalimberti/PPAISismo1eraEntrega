@@ -71,7 +71,11 @@ namespace PPAISismos.Data
             ordenes.Add(Orden8);
             return ordenes;
         }
-        
-       
+
+        //EstadoSismografo, falta agregar los estados que faltan en el dominio
+        public static EstadoSismografo EstadoFueraDeServicio { get; set; } = new EstadoSismografo("FueraDeServicio");
+        public static EstadoSismografo EstadoPrueba2 { get; set; } = new EstadoSismografo("EstadoPrueba2");
+
+
     }
 }

@@ -56,8 +56,9 @@ namespace PPAISismos.Gestor
                 // prefiero no seperarlo porque ahi si seria hacer dos for each
                 if (oi.esDeEmpleado(empleadoLogueado) && oi.verificarOIRealizada()) 
                 {
+                    oi.obtenerES();
                     oiDeEmpleado.Add(oi);
-                    Console.WriteLine(oi.getNumeroOrden());
+                    //Console.WriteLine(oi.getNumeroOrden());
                 }
             }
 

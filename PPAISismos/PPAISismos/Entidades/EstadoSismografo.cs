@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace PPAISismos.Entidades
 {
-    public class EstadoOI
+    public class EstadoSismografo
     {
         private string nombre;
 
-        public EstadoOI(string nombre)
+        public EstadoSismografo(string nombre)
         {
             this.nombre = nombre;
         }
-   
-        public bool esRealizada() { return nombre == "Realizada"; }
-        public bool esCerrada() { return nombre == "Cerrada"; }
-
+        
+        public bool esRealizada() { return nombre == "FueraDeServicio"; }
     }
 }

@@ -52,8 +52,8 @@ namespace PPAISismos.Data
         public static EstadoOI EstadoCompletamenteFinalizada { get; set; } = new EstadoOI("CompletamenteFinalizada");
         //Buscar mas estados en el dominio, este es de prueba:
         public static EstadoOI EstadoNada { get; set; } = new EstadoOI("Nada");
-        
-        
+
+//hola
 
         // REVISAR EN EL DOMINIO LAS FECHAS
 

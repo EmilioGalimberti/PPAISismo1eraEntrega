@@ -11,40 +11,39 @@ namespace PPAISismos.Gestor
 {
     public class GestorCierreIO
     {
-        //Atributos
+        // Atributos:
         private PantallaCierreOI pantallaCierreOI { get; set; }
         private Sesion sesionActual { get; set; }
         private Empleado empleadoLogueado { get; set; }
-        //Lista de ordenes
+        // Lista de ordenes de inspección (OI)
         private List<OrdenDeInspeccion> ordenesDeInspeccion;
-
-        //para encontrar las oiDeEmpleado realizadas, mostrar IdentifciacionSismografo y  y nombre Estacion)
+        // Para encontrar las oiDeEmpleado realizadas, mostrar identificacionSismografo y nombreEstacion
         private List<(OrdenDeInspeccion, int, string)> oiDeEmpleadoRealizadasyNroSismografo { get; set; }
-        //ES de la OI
+        // Estación sismológica (ES) de la OI
         private EstacionSismologica estacionSismologicaOI;
-        //lista de sismografos
+        // Lista de sismógrafos
         private List<Sismografo> sismografos { get; set; }
-        //Constructor
+
+        // Constructor del gestor
         public GestorCierreIO(PantallaCierreOI pantalla)
         {
             this.pantallaCierreOI = pantalla;
-
-            //Cargar sesion actual
+            // Cargar sesión actual
             Sesion sesion = Data.Data.loadSesion();
             this.sesionActual = sesion;
-
-            //cargar lista de ordenes de inspeccion
+            // Cargar lista de OI
             ordenesDeInspeccion = Data.Data.loadOrdenesDeInspeccion();
-            //carga lista de sismografos
+            // Cargar lista de sismógrafos
             sismografos = Data.Data.loadSismografos();
         }
 
         public void cerrarOI()
         {
             empleadoLogueado = obtenerEmpleado();
-            //Console.WriteLine(empleadoLogueado.getNombre());
+            // Console.WriteLine(empleadoLogueado.getNombre());
             buscarOICompletadas(empleadoLogueado);
         }
+        
         public Empleado obtenerEmpleado()
         {
             return sesionActual.getUsuario();

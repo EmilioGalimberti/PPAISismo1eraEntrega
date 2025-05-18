@@ -84,6 +84,12 @@ namespace PPAISismos.Data
         public static EstadoSismografo EstadoEnLinea { get; set; } = new EstadoSismografo("EnLinea");
         public static EstadoSismografo EstadoInhabilitadoPorInspeccion { get; set; } = new EstadoSismografo("InhabilitadoPorInspeccion");
         public static EstadoSismografo EstadoEnInstalacion{ get; set; } = new EstadoSismografo("EnInstalacion");
+        public static EstadoSismografo EstadoReclamado{ get; set; } = new EstadoSismografo("Reclamado");
+        public static EstadoSismografo EstadoDeBaja{ get; set; } = new EstadoSismografo("DeBaja");
+        public static EstadoSismografo EstadoIncluidoEnPlanDeConstruccion{ get; set; } = new EstadoSismografo("IncluidoEnPlanDeConstruccion");
+        public static EstadoSismografo EstadoHabilitadoASerIncluido{ get; set; } = new EstadoSismografo("HabilitadoASerIncluido");
+        public static EstadoSismografo EstadoDisponible{ get; set; } = new EstadoSismografo("Disponible");
+        public static EstadoSismografo EstadoEnEsperaDeCertificacion{ get; set; } = new EstadoSismografo("EnEsperaDeCertificacion");
 
         //Cambio de estado sismografos
         //      DateTime? fechaHoraFin, DateTime? fechaHoraInicio, EstadoSismografo estadoSismografo)

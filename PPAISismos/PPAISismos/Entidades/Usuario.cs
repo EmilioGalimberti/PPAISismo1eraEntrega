@@ -19,5 +19,8 @@ namespace PPAISismos.Entidades
             this.contrasena = contrasena;
             this.empleado = empleado;
         }
+
+        public Empleado getEmpleado() { return empleado; }
+
     }
 }

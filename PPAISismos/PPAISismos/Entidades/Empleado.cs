@@ -22,7 +22,12 @@ namespace PPAISismos.Entidades
             this.rol = rol;
         }
         //Getters y Setters AGREGARLOS EN CASO DE SER UN METODO ESPECIFICO QUE SE USE EN EL DIAGRAMA DE SECUENCIA
- 
+
+        //SOLO PARA PROBAR que la sesion tiene este empleado
+        //public string getNombre()
+        //{
+        //    return nombre;
+        //}
 
     }
 }

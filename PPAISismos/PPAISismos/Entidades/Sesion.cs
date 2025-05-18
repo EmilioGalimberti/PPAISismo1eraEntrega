@@ -24,7 +24,7 @@ namespace PPAISismos.Entidades
         }
 
         //--> Obtener el Empleado logueado
-        //public PersonalCientifico verificarCientificoLogueado() { return usuarioActual.obtenerCientifico(); }
+        public Empleado getUsuario() { return usuarioActual.getEmpleado(); }
     }
 }
 

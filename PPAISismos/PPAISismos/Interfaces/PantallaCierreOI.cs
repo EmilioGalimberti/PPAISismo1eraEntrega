@@ -1,4 +1,5 @@
-﻿using PPAISismos.Gestor;
+﻿using PPAISismos.Entidades;
+using PPAISismos.Gestor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,12 +27,13 @@ namespace PPAISismos.Interfaces
         private void seleccionOpcionCerrarOI()
         {
             InitializeComponent();
-            habilitarPantalla();
+            Sesion sesion = Data.Data.loadSesion();
+            habilitarPantalla(sesion);
         }
 
-        private void habilitarPantalla() {             
+        private void habilitarPantalla(Sesion sesion) {             
             //creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
-            gestor = new GestorCierreIO(this);
+            gestor = new GestorCierreIO(this,sesion);
             gestor.cerrarOI();
         }
 

@@ -53,5 +53,11 @@ namespace PPAISismos.Entidades
            return estadoOI.esRealizada();
         }
 
+        //para obtener el puntero a la ES
+        public EstacionSismologica obtenerES()
+        {
+            return estacionSismologica;
+        }
+
     }
 }

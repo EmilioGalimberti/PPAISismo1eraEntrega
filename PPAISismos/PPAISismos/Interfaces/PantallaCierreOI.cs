@@ -39,7 +39,7 @@ namespace PPAISismos.Interfaces
         }
 
         // Método para solicitar la selección de la OI
-        public void solicitarSeleccionOI(List<(OrdenDeInspeccion, int, string)> lista)
+        public void solicitarSeleccionOI(List<(int NumeroOrden, DateTime FechaFinalizacion, string NombreEstacion, int IdentificadorSismografo)> lista)
         {
             dataGridOrdenes.Visible = true;
             dataGridOrdenes.Rows.Clear();
@@ -62,11 +62,10 @@ namespace PPAISismos.Interfaces
             foreach (var tupla in lista)
             {
                 dataGridOrdenes.Rows.Add(
-                    tupla.Item1.getNumeroOrden(),
-                    tupla.Item1.getFechaFinalizacion(),
-                    tupla.Item3,
-                    tupla.Item2
-
+                    tupla.NumeroOrden,
+                    tupla.FechaFinalizacion,
+                    tupla.NombreEstacion,
+                    tupla.IdentificadorSismografo
                 );
             }
 

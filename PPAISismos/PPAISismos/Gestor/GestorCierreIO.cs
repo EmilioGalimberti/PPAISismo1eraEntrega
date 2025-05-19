@@ -26,7 +26,6 @@ namespace PPAISismos.Gestor
 
         //OI SELECCIONADA
         private (OrdenDeInspeccion, int, string) ordenSeleccionada;
-
         // Constructor del gestor
         public GestorCierreIO(PantallaCierreOI pantalla)
         {
@@ -62,7 +61,6 @@ namespace PPAISismos.Gestor
             {
                 //nose si dejarlo en un if o separarlo en dos, pero como no hacemos los
                 // option en el diagrama de secuencia
-               
                 if (oi.esDeEmpleado(empleadoLogueado) && oi.verificarOIRealizada()) 
                 {
                     estacionSismologicaOI = oi.obtenerES();
@@ -70,17 +68,30 @@ namespace PPAISismos.Gestor
                     {
                         if (sismografo.esTuES(estacionSismologicaOI))
                         {
-                            // por ahora voy a dejar esto pero creo que ya no haria falta con listaPara pantalla
+
                             oiDeEmpleadoRealizadasyNroSismografo.Add((oi, sismografo.getIdentificador(), oi.getNombreEs()));
                             
                         }
                     }
                     
                 }
-                oiDeEmpleadoRealizadasyNroSismografo = ordenarOIPorFechaFinal(oiDeEmpleadoRealizadasyNroSismografo);
             }
-            //FALTA ORGANIZARLAS POR FECHA DE FINALIZACION para eso darle fechas diferentes tmb en el data
-            pantallaCierreOI.solicitarSeleccionOI(oiDeEmpleadoRealizadasyNroSismografo);
+            oiDeEmpleadoRealizadasyNroSismografo = ordenarOIPorFechaFinal(oiDeEmpleadoRealizadasyNroSismografo);
+
+            //ESTO LO HAGO PARA PODER EVITAR LA DEPENDENCIA DE LA PANTALLA CON LA OI, porque osino le pasaba una oi directamente preguntar si esto tendria que estar en el diagrama de secuecnia, el obtener nro y la fecha
+            // Transforma la lista de tuplas de dominio a una lista de tuplas simples
+            var listaParaPantalla = oiDeEmpleadoRealizadasyNroSismografo
+                .Select(tupla => (
+                    tupla.Item1.getNumeroOrden(),
+                    tupla.Item1.getFechaFinalizacion(),
+                    tupla.Item3, // NombreEstacion
+                    tupla.Item2  // IdentificadorSismografo
+                ))
+                .ToList();
+
+            // Ahora pasas solo datos simples a la pantalla
+         
+            pantallaCierreOI.solicitarSeleccionOI(listaParaPantalla);
             
         }
 

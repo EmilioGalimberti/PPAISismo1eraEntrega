@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dataGridOrdenes = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxObservaciones = new System.Windows.Forms.TextBox();
+            this.labelObservacion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,20 +42,57 @@
             this.dataGridOrdenes.AllowUserToResizeColumns = false;
             this.dataGridOrdenes.AllowUserToResizeRows = false;
             this.dataGridOrdenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridOrdenes.Location = new System.Drawing.Point(12, 83);
+            this.dataGridOrdenes.Location = new System.Drawing.Point(12, 38);
             this.dataGridOrdenes.MultiSelect = false;
             this.dataGridOrdenes.Name = "dataGridOrdenes";
             this.dataGridOrdenes.ReadOnly = true;
             this.dataGridOrdenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridOrdenes.Size = new System.Drawing.Size(576, 150);
+            this.dataGridOrdenes.Size = new System.Drawing.Size(349, 64);
             this.dataGridOrdenes.TabIndex = 0;
-            this.dataGridOrdenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridOrdenes_CellClick);         
+            this.dataGridOrdenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridOrdenes_CellClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(321, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Ordenes De Inspeccion Realizadas de:";
+            // 
+            // textBoxObservaciones
+            // 
+            this.textBoxObservaciones.Location = new System.Drawing.Point(16, 170);
+            this.textBoxObservaciones.Multiline = true;
+            this.textBoxObservaciones.Name = "textBoxObservaciones";
+            this.textBoxObservaciones.Size = new System.Drawing.Size(173, 39);
+            this.textBoxObservaciones.TabIndex = 2;
+            this.textBoxObservaciones.Tag = "";
+            this.textBoxObservaciones.Visible = false;
+            // 
+            // labelObservacion
+            // 
+            this.labelObservacion.AutoSize = true;
+            this.labelObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelObservacion.ForeColor = System.Drawing.Color.White;
+            this.labelObservacion.Location = new System.Drawing.Point(12, 147);
+            this.labelObservacion.Name = "labelObservacion";
+            this.labelObservacion.Size = new System.Drawing.Size(51, 20);
+            this.labelObservacion.TabIndex = 3;
+            this.labelObservacion.Text = "label2";
+            this.labelObservacion.Visible = false;
+            // 
             // PantallaCierreOI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.labelObservacion);
+            this.Controls.Add(this.textBoxObservaciones);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridOrdenes);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PantallaCierreOI";
@@ -60,11 +100,15 @@
             this.Load += new System.EventHandler(this.PantallaCierreOI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridOrdenes;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxObservaciones;
+        private System.Windows.Forms.Label labelObservacion;
     }
 }

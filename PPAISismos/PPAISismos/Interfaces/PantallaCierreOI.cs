@@ -23,6 +23,7 @@ namespace PPAISismos.Interfaces
         {
             seleccionOpcionCerrarOI();
             
+
         }
         
         private void seleccionOpcionCerrarOI()
@@ -68,6 +69,13 @@ namespace PPAISismos.Interfaces
 
                 );
             }
+
+            //Esto es para que se ajuste el tamaño de la tabla a los datos
+            dataGridOrdenes.AutoResizeColumns();
+            dataGridOrdenes.AutoResizeRows();
+            dataGridOrdenes.Width = dataGridOrdenes.PreferredSize.Width;
+            dataGridOrdenes.Height = dataGridOrdenes.PreferredSize.Height;
+
         }
 
         private void PantallaCierreOI_Load(object sender, EventArgs e)
@@ -89,5 +97,17 @@ namespace PPAISismos.Interfaces
         {
             gestor.tomarOrdenSeleccionada(row);
         }
+
+        //Para la observacion de cierre
+        public void solicitarObservacion(int numeroOrden)
+        {
+            //ACA PARA EL LABEL DE INGRESE UNA OBSERVACION LE PODRIA PEDIR QUE INGRESE UNA OBSERVACION y a que orden le estaria ingresando la observacion pero significaria pasarle la oi seleccionada
+            //y nose si estaria del todo bien para los atributos de la pantalla, De ultima podemos preguntar
+            labelObservacion.Text = $"Ingrese una observación para la orden seleccionada: {numeroOrden}";
+            labelObservacion.Visible = true;
+            textBoxObservaciones.Visible = true;
+
+        }
+
     }
 }

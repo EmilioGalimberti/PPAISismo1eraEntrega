@@ -57,11 +57,12 @@ namespace PPAISismos.Gestor
         {
             
             oiDeEmpleadoRealizadasyNroSismografo = new List<(OrdenDeInspeccion,int,string)>();
+
             foreach (OrdenDeInspeccion oi in ordenesDeInspeccion)
             {
                 //nose si dejarlo en un if o separarlo en dos, pero como no hacemos los
                 // option en el diagrama de secuencia
-                // prefiero no seperarlo porque ahi si seria hacer dos for each
+               
                 if (oi.esDeEmpleado(empleadoLogueado) && oi.verificarOIRealizada()) 
                 {
                     estacionSismologicaOI = oi.obtenerES();
@@ -69,8 +70,7 @@ namespace PPAISismos.Gestor
                     {
                         if (sismografo.esTuES(estacionSismologicaOI))
                         {
-                            //Fijarse si logramos que en vez de tener que ir a obtener el nombre podemos devolver una tupla
-                            // con el obtenerES()
+                            // por ahora voy a dejar esto pero creo que ya no haria falta con listaPara pantalla
                             oiDeEmpleadoRealizadasyNroSismografo.Add((oi, sismografo.getIdentificador(), oi.getNombreEs()));
                             
                         }
@@ -94,11 +94,10 @@ namespace PPAISismos.Gestor
         public void tomarOrdenSeleccionada(int row) {
 
             ordenSeleccionada = oiDeEmpleadoRealizadasyNroSismografo[row];
-
             Console.Write("AAAAAAAAAAAAAAAAAAAAAAA");
             // Por ejemplo:
             Console.WriteLine($"Seleccionaste la orden N°: {ordenSeleccionada.Item1.getNumeroOrden()}");
-
+            pantallaCierreOI.solicitarObservacion(ordenSeleccionada.Item1.getNumeroOrden());
 
         }
 

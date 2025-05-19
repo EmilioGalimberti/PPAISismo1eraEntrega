@@ -105,15 +105,19 @@ namespace PPAISismos.Gestor
         public void tomarOrdenSeleccionada(int row) {
 
             ordenSeleccionada = oiDeEmpleadoRealizadasyNroSismografo[row];
-            Console.Write("AAAAAAAAAAAAAAAAAAAAAAA");
-            // Por ejemplo:
-            Console.WriteLine($"Seleccionaste la orden N°: {ordenSeleccionada.Item1.getNumeroOrden()}");
+            //ACA PREGUNTAR SI POR EJEMPLO ESTE GET NUMERO ORDEN HABIRA QUE AGG EN EL DIAGRAMA DE SECUENCIA
             pantallaCierreOI.solicitarObservacion(ordenSeleccionada.Item1.getNumeroOrden());
 
         }
 
-   
-   
+        public void tomarObservacion(string observacion)
+        {
+            Console.WriteLine(observacion);
+        }
+
+
+
+
     }
 
 }

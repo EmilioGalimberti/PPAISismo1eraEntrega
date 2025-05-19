@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxObservaciones = new System.Windows.Forms.TextBox();
             this.labelObservacion = new System.Windows.Forms.Label();
+            this.btnGuardarObservacion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,12 +85,24 @@
             this.labelObservacion.Text = "label2";
             this.labelObservacion.Visible = false;
             // 
+            // btnGuardarObservacion
+            // 
+            this.btnGuardarObservacion.Location = new System.Drawing.Point(516, 83);
+            this.btnGuardarObservacion.Name = "btnGuardarObservacion";
+            this.btnGuardarObservacion.Size = new System.Drawing.Size(60, 23);
+            this.btnGuardarObservacion.TabIndex = 4;
+            this.btnGuardarObservacion.Text = "Guardar";
+            this.btnGuardarObservacion.UseVisualStyleBackColor = true;
+            this.btnGuardarObservacion.Visible = false;
+            this.btnGuardarObservacion.Click += new System.EventHandler(this.btnGuardarObservacion_Click);
+            // 
             // PantallaCierreOI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(957, 366);
+            this.Controls.Add(this.btnGuardarObservacion);
             this.Controls.Add(this.labelObservacion);
             this.Controls.Add(this.textBoxObservaciones);
             this.Controls.Add(this.label1);
@@ -110,5 +123,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxObservaciones;
         private System.Windows.Forms.Label labelObservacion;
+        private System.Windows.Forms.Button btnGuardarObservacion;
     }
 }

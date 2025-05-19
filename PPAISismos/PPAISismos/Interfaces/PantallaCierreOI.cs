@@ -16,7 +16,7 @@ namespace PPAISismos.Interfaces
     public partial class PantallaCierreOI : Form
     {
         // Atributos: 
-        private GestorCierreIO gestor { get; set; }
+        private GestorCierreIO gestorCerrarOI { get; set; }
         
         // Constructor de la pantalla
         public PantallaCierreOI()
@@ -34,8 +34,8 @@ namespace PPAISismos.Interfaces
 
         private void habilitarPantalla() {
             // Creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
-            gestor = new GestorCierreIO(this);
-            gestor.cerrarOI();
+            gestorCerrarOI = new GestorCierreIO(this);
+            gestorCerrarOI.cerrarOI();
         }
 
         // Método para solicitar la selección de la OI
@@ -94,7 +94,7 @@ namespace PPAISismos.Interfaces
 
         private void ordenSeleccionada(int row)
         {
-            gestor.tomarOrdenSeleccionada(row);
+            gestorCerrarOI.tomarOrdenSeleccionada(row);
         }
 
         //Para la observacion de cierre
@@ -105,8 +105,27 @@ namespace PPAISismos.Interfaces
             labelObservacion.Text = $"Ingrese una observación para la orden seleccionada: {numeroOrden}";
             labelObservacion.Visible = true;
             textBoxObservaciones.Visible = true;
+            btnGuardarObservacion.Visible = true;
 
         }
 
+        private void btnGuardarObservacion_Click(object sender, EventArgs e)
+        {
+            string observacion = textBoxObservaciones.Text;
+           
+            if (string.IsNullOrEmpty(observacion))
+            {
+                MessageBox.Show("Debe ingresar una observación antes de guardar.", "Observación requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxObservaciones.Focus();
+                return;
+            }
+            // Deshabilitar controles para evitar más cambios
+            //ES PARA PROBAR NOMAS DESPUES VEMOS SI LO DEJAMOS O NO
+            //textBoxObservaciones.Enabled = false;
+            //btnGuardarObservacion.Enabled = false;
+            //dataGridOrdenes.Enabled = false;
+
+            gestorCerrarOI.tomarObservacion(observacion);
+        }
     }
 }

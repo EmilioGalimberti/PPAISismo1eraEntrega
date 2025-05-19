@@ -64,7 +64,7 @@
             // 
             // textBoxObservaciones
             // 
-            this.textBoxObservaciones.Location = new System.Drawing.Point(16, 170);
+            this.textBoxObservaciones.Location = new System.Drawing.Point(516, 38);
             this.textBoxObservaciones.Multiline = true;
             this.textBoxObservaciones.Name = "textBoxObservaciones";
             this.textBoxObservaciones.Size = new System.Drawing.Size(173, 39);
@@ -77,7 +77,7 @@
             this.labelObservacion.AutoSize = true;
             this.labelObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelObservacion.ForeColor = System.Drawing.Color.White;
-            this.labelObservacion.Location = new System.Drawing.Point(12, 147);
+            this.labelObservacion.Location = new System.Drawing.Point(512, 15);
             this.labelObservacion.Name = "labelObservacion";
             this.labelObservacion.Size = new System.Drawing.Size(51, 20);
             this.labelObservacion.TabIndex = 3;
@@ -89,7 +89,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(79)))));
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(957, 366);
             this.Controls.Add(this.labelObservacion);
             this.Controls.Add(this.textBoxObservaciones);
             this.Controls.Add(this.label1);

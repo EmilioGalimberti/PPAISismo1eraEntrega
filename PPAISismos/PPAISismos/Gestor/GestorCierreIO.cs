@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PPAISismos.Gestor
 {
@@ -30,6 +31,12 @@ namespace PPAISismos.Gestor
         private (OrdenDeInspeccion, int, string) ordenSeleccionada;
         // Lista de tipos de motivo y comentarios
         private List<(string tipoMotivo, string comentario)> tiposMotivoYComentarios = new List<(string, string)>();
+        // Observación de cierre
+        private string observacionCierre;
+        // Lista de estados
+        private List<EstadoOI> estados;
+        // Lista de estados de sismógrafo
+        private List<EstadoSismografo> estadosSismografo;
 
         // Constructor del gestor
         public GestorCierreIO(PantallaCierreOI pantalla)
@@ -44,6 +51,10 @@ namespace PPAISismos.Gestor
             sismografos = Data.Data.loadSismografos();
             // Cargar lista de tipos de motivo
             tiposDeMotivo = Data.Data.loadTiposDeMotivo();
+            // Cargar lista de estados
+            estados = Data.Data.loadEstadosOI();
+            // Cargar lista de estados de sismógrafo
+            estadosSismografo = Data.Data.loadEstadosSismografo();
         }
 
         public void cerrarOI()
@@ -119,6 +130,7 @@ namespace PPAISismos.Gestor
 
         public void tomarObservacion(string observacion)
         {
+            this.observacionCierre = observacion;
             Console.WriteLine(observacion);
             buscarTipoMotivo();
         }
@@ -152,11 +164,84 @@ namespace PPAISismos.Gestor
             Console.WriteLine($"Comentario ingresado para {tipoMotivoSeleccionado}: {comentario}");
         }
 
+        private bool validarDatosMinimos()
+        {
+            if (string.IsNullOrEmpty(observacionCierre))
+            {
+                Console.WriteLine("Error: Debe ingresar una observación de cierre");
+                return false;
+            }
+
+            if (tiposMotivoYComentarios.Count == 0)
+            {
+                Console.WriteLine("Error: Debe seleccionar al menos un tipo de motivo");
+                return false;
+            }
+
+            return true;
+        }
+
+        private EstadoOI buscarEstadoCerrada()
+        {
+            foreach (EstadoOI estado in estados)
+            {
+                if (estado.esCerrada())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
+
+        private EstadoSismografo buscarEstadoFueraServicio()
+        {
+            foreach (EstadoSismografo estado in estadosSismografo)
+            {
+                if (estado.esFueraServicio())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
+
+        private DateTime getFechaHoraActual()
+        {
+            return DateTime.Now;
+        }
+
+        private void actualizarOrden(OrdenDeInspeccion orden, DateTime fechaHoraCierre, EstadoOI estadoCerrada)
+        {
+            orden.cerrarOrden(fechaHoraCierre, estadoCerrada);
+        }
+
         public void tomarConfirmacionCierre(bool confirmado)
         {
             if (confirmado)
             {
-                // TODO: Implementar la lógica para cerrar la orden de inspección
+                if (!validarDatosMinimos())
+                {
+                    MessageBox.Show("Error: Debe ingresar una observación y al menos un tipo de motivo", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                EstadoOI estadoCerrada = buscarEstadoCerrada();
+                if (estadoCerrada == null)
+                {
+                    MessageBox.Show("Error: No se encontró el estado 'Cerrada'", "Error de estado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                EstadoSismografo estadoFueraServicio = buscarEstadoFueraServicio();
+                if (estadoFueraServicio == null)
+                {
+                    MessageBox.Show("Error: No se encontró el estado 'FueraDeServicio'", "Error de estado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                DateTime fechaHoraActual = getFechaHoraActual();
+                actualizarOrden(ordenSeleccionada.Item1, fechaHoraActual, estadoCerrada);
+
                 Console.WriteLine("Orden de inspección cerrada exitosamente");
                 Console.WriteLine("Tipos de motivo y comentarios registrados:");
                 foreach (var (tipoMotivo, comentario) in tiposMotivoYComentarios)

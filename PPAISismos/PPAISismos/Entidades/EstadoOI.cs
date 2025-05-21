@@ -14,9 +14,20 @@ namespace PPAISismos.Entidades
         {
             this.nombre = nombre;
         }
-   
-        public bool esRealizada() { return nombre == "Realizada"; }
-        public bool esCerrada() { return nombre == "Cerrada"; }
 
+        public bool esCerrada()
+        {
+            return nombre.Equals("Cerrada", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public bool esRealizada()
+        {
+            return nombre.Equals("CompletamenteRealizada", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public string getNombre()
+        {
+            return nombre;
+        }
     }
 }

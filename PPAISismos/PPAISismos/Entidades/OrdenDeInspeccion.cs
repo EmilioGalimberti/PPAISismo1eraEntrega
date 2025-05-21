@@ -68,5 +68,11 @@ namespace PPAISismos.Entidades
         {
             return fechaHoraFinalizacion;
         }
+
+        public void cerrarOrden(DateTime fechaHoraCierre, EstadoOI estadoCerrada)
+        {
+            this.fechaHoraCierre = fechaHoraCierre;
+            this.estadoOI = estadoCerrada;
+        }
     }
 }

@@ -215,6 +215,27 @@ namespace PPAISismos.Gestor
             orden.cerrarOrden(fechaHoraCierre, estadoCerrada);
         }
 
+        private Sismografo obtenerSismografo()
+        {
+            foreach (Sismografo sismografo in sismografos)
+            {
+                if (sismografo.esTuES(ordenSeleccionada.Item1.obtenerES()))
+                {
+                    return sismografo;
+                }
+            }
+            return null;
+        }
+
+        private void ponerSismografoFueraServicio(EstadoSismografo estadoFueraServicio)
+        {
+            Sismografo sismografo = obtenerSismografo();
+            if (sismografo != null)
+            {
+                sismografo.ponerFueraServicio(estadoFueraServicio);
+            }
+        }
+
         public void tomarConfirmacionCierre(bool confirmado)
         {
             if (confirmado)
@@ -241,6 +262,8 @@ namespace PPAISismos.Gestor
 
                 DateTime fechaHoraActual = getFechaHoraActual();
                 actualizarOrden(ordenSeleccionada.Item1, fechaHoraActual, estadoCerrada);
+
+                ponerSismografoFueraServicio(estadoFueraServicio);
 
                 Console.WriteLine("Orden de inspección cerrada exitosamente");
                 Console.WriteLine("Tipos de motivo y comentarios registrados:");

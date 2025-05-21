@@ -135,5 +135,26 @@ namespace PPAISismos.Data
             listaSismografos.Add(Sismografo3);
             return listaSismografos;
         }
+
+        // Tipos de motivo
+        public static TipoMotivo AveriaPorVibracion { get; set; } = new TipoMotivo("AveriaPorVibracion");
+        public static TipoMotivo DesgasteDeComponente { get; set; } = new TipoMotivo("DesgasteDeComponente");
+        public static TipoMotivo FalloEnElSistemaDeRegistro { get; set; } = new TipoMotivo("FalloEnElSistemaDeRegistro");
+        public static TipoMotivo FalloEnFuenteDeAlimentacion { get; set; } = new TipoMotivo("FalloEnFuenteDeAlimentacion");
+        public static TipoMotivo Vandalismo { get; set; } = new TipoMotivo("Vandalismo");
+        public static TipoMotivo Otro { get; set; } = new TipoMotivo("Otro");
+
+        // Lista de tipos de motivo
+        public static List<TipoMotivo> loadTiposDeMotivo()
+        {
+            List<TipoMotivo> listaTiposDeMotivo = new List<TipoMotivo>();
+            listaTiposDeMotivo.Add(AveriaPorVibracion);
+            listaTiposDeMotivo.Add(DesgasteDeComponente);
+            listaTiposDeMotivo.Add(FalloEnElSistemaDeRegistro);
+            listaTiposDeMotivo.Add(FalloEnFuenteDeAlimentacion);
+            listaTiposDeMotivo.Add(Vandalismo);
+            listaTiposDeMotivo.Add(Otro);
+            return listaTiposDeMotivo;
+        }
     }
 }

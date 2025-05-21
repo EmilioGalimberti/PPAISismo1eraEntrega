@@ -23,9 +23,14 @@ namespace PPAISismos.Gestor
         private EstacionSismologica estacionSismologicaOI;
         // Lista de sismógrafos
         private List<Sismografo> sismografos { get; set; }
+        // Lista de tipos de motivo
+        private List<TipoMotivo> tiposDeMotivo { get; set; }
 
-        //OI SELECCIONADA
+        // OI seleccionada
         private (OrdenDeInspeccion, int, string) ordenSeleccionada;
+        // Lista de tipos de motivo y comentarios
+        private List<(string tipoMotivo, string comentario)> tiposMotivoYComentarios = new List<(string, string)>();
+
         // Constructor del gestor
         public GestorCierreIO(PantallaCierreOI pantalla)
         {
@@ -37,6 +42,8 @@ namespace PPAISismos.Gestor
             ordenesDeInspeccion = Data.Data.loadOrdenesDeInspeccion();
             // Cargar lista de sismógrafos
             sismografos = Data.Data.loadSismografos();
+            // Cargar lista de tipos de motivo
+            tiposDeMotivo = Data.Data.loadTiposDeMotivo();
         }
 
         public void cerrarOI()
@@ -113,11 +120,54 @@ namespace PPAISismos.Gestor
         public void tomarObservacion(string observacion)
         {
             Console.WriteLine(observacion);
+            buscarTipoMotivo();
         }
 
+        private void buscarTipoMotivo()
+        {
+            List<string> descripciones = new List<string>();
+            foreach (TipoMotivo tipoMotivo in tiposDeMotivo)
+            {
+                descripciones.Add(tipoMotivo.getDescripcion());
+            }
+            pantallaCierreOI.solicitarSeleccionTipoMotivo(descripciones);
+        }
 
+        public void tomarSeleccionTipoMotivo(string tipoMotivoSeleccionado)
+        {
+            // TODO: Implementar la lógica para manejar la selección del tipo de motivo
+            Console.WriteLine($"Tipo de motivo seleccionado: {tipoMotivoSeleccionado}");
+            pantallaCierreOI.solicitarComentario();
+        }
 
+        public void tomarIngresoComentario(string comentario)
+        {
+            // Obtener el tipo de motivo seleccionado actualmente
+            string tipoMotivoSeleccionado = pantallaCierreOI.getTipoMotivoSeleccionado();
+            
+            // Agregar el par tipo de motivo y comentario a la lista
+            tiposMotivoYComentarios.Add((tipoMotivoSeleccionado, comentario));
+            
+            // TODO: Implementar la lógica para manejar el comentario
+            Console.WriteLine($"Comentario ingresado para {tipoMotivoSeleccionado}: {comentario}");
+        }
 
+        public void tomarConfirmacionCierre(bool confirmado)
+        {
+            if (confirmado)
+            {
+                // TODO: Implementar la lógica para cerrar la orden de inspección
+                Console.WriteLine("Orden de inspección cerrada exitosamente");
+                Console.WriteLine("Tipos de motivo y comentarios registrados:");
+                foreach (var (tipoMotivo, comentario) in tiposMotivoYComentarios)
+                {
+                    Console.WriteLine($"- {tipoMotivo}: {comentario}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Cierre de orden de inspección cancelado");
+            }
+        }
     }
-
 }

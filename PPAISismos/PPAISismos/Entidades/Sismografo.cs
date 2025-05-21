@@ -29,5 +29,37 @@ namespace PPAISismos.Entidades
         public bool esTuES(EstacionSismologica estacionSismologicaOI) { return estacionSismologicaOI == estacionSismologica; }
 
         public int getIdentificador() { return identificadoSismografo; }
+
+        private CambioEstadoSismografo buscarCambioEstadoActual()
+        {
+            foreach (CambioEstadoSismografo cambioEstado in listaCambioEstadoSismografo)
+            {
+                if (cambioEstado.esActual())
+                {
+                    return cambioEstado;
+                }
+            }
+            return null;
+        }
+
+        private void cerrarCambioEstado(DateTime fechaHoraActual)
+        {
+            CambioEstadoSismografo cambioEstadoActual = buscarCambioEstadoActual();
+            if (cambioEstadoActual != null)
+            {
+                cambioEstadoActual.setFechaHoraFin(fechaHoraActual);
+            }
+        }
+
+        public void ponerFueraServicio(EstadoSismografo estadoFueraServicio, DateTime fechaHoraActual, List<(string tipoMotivo, string comentario)> tiposMotivoYComentarios)
+        {
+            cerrarCambioEstado(fechaHoraActual);
+            CambioEstadoSismografo nuevoCambioEstado = new CambioEstadoSismografo(null, fechaHoraActual, estadoFueraServicio);
+            foreach (var (tipoMotivo, comentario) in tiposMotivoYComentarios)
+            {
+                nuevoCambioEstado.crearMotivoFueraServicio(tipoMotivo, comentario);
+            }
+            listaCambioEstadoSismografo.Add(nuevoCambioEstado);
+        }
     }
 }

@@ -232,7 +232,8 @@ namespace PPAISismos.Gestor
             Sismografo sismografo = obtenerSismografo();
             if (sismografo != null)
             {
-                sismografo.ponerFueraServicio(estadoFueraServicio);
+                DateTime fechaHoraActual = getFechaHoraActual();
+                sismografo.ponerFueraServicio(estadoFueraServicio, fechaHoraActual, tiposMotivoYComentarios);
             }
         }
 

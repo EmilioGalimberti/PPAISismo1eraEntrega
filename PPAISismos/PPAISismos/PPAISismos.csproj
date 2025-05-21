@@ -52,6 +52,7 @@
     <Compile Include="Entidades\EstacionSismologica.cs" />
     <Compile Include="Entidades\EstadoOI.cs" />
     <Compile Include="Entidades\EstadoSismografo.cs" />
+    <Compile Include="Entidades\MotivoFueraServicio.cs" />
     <Compile Include="Entidades\OrdenDeInspeccion.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Sesion.cs" />

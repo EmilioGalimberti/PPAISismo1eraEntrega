@@ -30,7 +30,7 @@ namespace PPAISismos.Gestor
 
         private int identificardorSismografo;
 
-        // Para encontrar las oiDeEmpleado realizadas, mostrar identificacionSismografo y nombreEstacion
+        // Para encontrar las oiDeEmpleado realizadas, Sismografo y nombreEstacion
         private List<(OrdenDeInspeccion, Sismografo, string)> ordenesRealizadasConSismografoYEstacion;
         // lista de atributos 
         private List<(int NumeroOrden, DateTime FechaFinalizacion, string NombreEstacion, int IdentificadorSismografo)> listaParaPantalla;
@@ -54,13 +54,7 @@ namespace PPAISismos.Gestor
         //Lista de estados sismografo
         List<EstadoSismografo> listaEstadosSismografo;
 
-        //EstadoOICerrada
-        EstadoOI estadoOICerrada;
-        //EstadoSismografoFueraServicio
-        EstadoSismografo estadoSismografoFueraServicio;
-
-
-
+ 
         // nombre del estado FueraServicio del sismografo para luego pasrlso a a la notificacion OBERSVACION 2
         string nombreEstadoSismografoFueraServicio;
 
@@ -188,40 +182,53 @@ namespace PPAISismos.Gestor
 
         public void tomarConfirmacion()
         {
-            validarDatosMinimos();
+            if (validarDatosMinimos())
+            {
+                //ESTO LO PODEMOS PASAR A QUE SEA UN ATTRIBUTO Y CAPAZ HASTA MEJOR
+                EstadoOI estadoOICerrada = buscarEstadoOICerrada();
+                getFechaHoraActual();
+                actualizarOrden(estadoOICerrada);
+                EstadoSismografo estadoSismografoFueraservicio = buscarEstadoSismografoFueraServicio();
+                nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
+                ponerSismografoFueraServicio(estadoSismografoFueraservicio);
+
+            }
+            else { 
+                //NOTIFICAR A LA PANTALLA ESTO ES UN FLUJO ALTERNATIVO
+                Console.WriteLine("No se puede cerrar la OI, faltan datos.");
+            }
         }
 
-        public void validarDatosMinimos(){
+        public bool validarDatosMinimos(){
             if (!string.IsNullOrWhiteSpace(observacionIngresada)) {
                 if(motivosSeleccionadosConComentarios != null && motivosSeleccionadosConComentarios.Count > 0)
                 {
-                        buscarEstadoOICerrada();
+                        return true;
                 }
                 else
                 {
                     Console.WriteLine("No se seleccionó ningún motivo.");
-                    return;
+                    return false;
                 }
-
             }
             else {                 
                 Console.WriteLine("La observación no puede estar vacía.");
-                return;
+                return false;
             }
         }
 
-        public void buscarEstadoOICerrada()
+        public EstadoOI buscarEstadoOICerrada()
         {
             foreach(var estadoOI in listaEstadosOI)
             {
                 if (estadoOI.esCerrada())
                 {
-                    estadoOICerrada = estadoOI;
+                    return estadoOI;
 
                 }
             }
-            getFechaHoraActual();
-            actualizarOrden(estadoOICerrada);
+            return null; // Si no se encuentra el estado, puedes manejarlo como desees
+
         }
         public void getFechaHoraActual()
         {
@@ -247,22 +254,19 @@ namespace PPAISismos.Gestor
             Console.WriteLine($"FechaHoraCierre: {ordenSeleccionada.Item1.getFechaHoraCierre()?.ToString() ?? "null"}");
             Console.WriteLine($"Observacion: {ordenSeleccionada.Item1.getObservacionCierre() ?? "null"}");
 
-            buscarEstadoSismografoFueraServicio();
+           
         }
 
-        public void buscarEstadoSismografoFueraServicio()
+        public EstadoSismografo buscarEstadoSismografoFueraServicio()
         {
             foreach (var estadoSismografo in listaEstadosSismografo)
             {
                 if (estadoSismografo.esFueraServicio())
                 {
-                    estadoSismografoFueraServicio = estadoSismografo;
+                    return estadoSismografo;
                 }
             }
-            nombreEstadoSismografoFueraServicio = estadoSismografoFueraServicio.getNombre();
-
-
-            ponerSismografoFueraServicio(estadoSismografoFueraServicio);
+            return null; // Si no se encuentra el estado, puedes manejarlo como desees
         }
         
         public void ponerSismografoFueraServicio(EstadoSismografo estadoSismografoFueraServicio)

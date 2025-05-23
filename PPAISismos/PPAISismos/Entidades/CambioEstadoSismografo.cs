@@ -15,13 +15,16 @@ namespace PPAISismos.Entidades
         EstadoSismografo estadoSismografo;
         //CambioEstadoSismografo -> 0..* MotivoFueraServicio
         private List<MotivoFueraServicio> motivosFueraServicio;
+        //CambioEstadoSismografo -> 1 Empleado
+        private Empleado responsableInspeccion;
 
-        public CambioEstadoSismografo(DateTime? fechaHoraFin, DateTime fechaHoraInicio, EstadoSismografo estadoSismografo)
+        public CambioEstadoSismografo(DateTime? fechaHoraFin, DateTime fechaHoraInicio, EstadoSismografo estadoSismografo, Empleado responsableInspeccion)
         {
             this.fechaHoraFin = fechaHoraFin;
             this.fechaHoraInicio = fechaHoraInicio;
             this.estadoSismografo = estadoSismografo;
             this.motivosFueraServicio = new List<MotivoFueraServicio>(); // Siempre inicializada pero vacia
+            this.responsableInspeccion = responsableInspeccion;
         }
 
         public bool esActual()

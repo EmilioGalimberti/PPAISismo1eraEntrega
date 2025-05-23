@@ -272,7 +272,7 @@ namespace PPAISismos.Gestor
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
             //ME OLVIDE DE PASARLE EL EMPLEADOOOOOO
             //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            ordenSeleccionada.Item2.ponerSismografoFueraServicio(estadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
+            ordenSeleccionada.Item2.ponerSismografoFueraServicio(estadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, empleadoLogueado);
             // ESTO ES SOLO PARA PROBAR EL DESPUES
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
         }

@@ -30,7 +30,7 @@ namespace PPAISismos.Entidades
 
         public int getIdentificador() { return identificadoSismografo; }
 
-        public void ponerSismografoFueraServicio(EstadoSismografo estadoSismografo, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
+        public void ponerSismografoFueraServicio(EstadoSismografo estadoSismografo, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios, Empleado empleadoLogueado)
         {
            CambioEstadoSismografo cambioEstadoActual = buscarCambioEstadoActual();
             if(cambioEstadoActual != null)
@@ -41,7 +41,8 @@ namespace PPAISismos.Entidades
                 var nuevoCambioEstado = new CambioEstadoSismografo(
                     null,                // fechaHoraFin (es actual, así que no tiene fin)
                     fechaHoraActual,     // fechaHoraInicio
-                    estadoSismografo     // nuevo estado
+                    estadoSismografo,     // nuevo estado
+                    empleadoLogueado
                 );
                 // Crear y asociar los motivos fuera de servicio
                 nuevoCambioEstado.crearMotivosFueraServicio(motivosSeleccionadosConComentarios);

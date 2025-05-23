@@ -36,7 +36,6 @@ class PantallaCierreOI <<boundary>> {
 
 
 }
-note right: nose si agg como atributo lo que uso para los motivos
 
 ' Paquete: Gestor
 class GestorCierreOI <<control>> {
@@ -89,11 +88,6 @@ class GestorCierreOI <<control>> {
     
 }
 
-note right
-Aca todos los nroOrden,fechaFinalzxaicion,identificador capaz 
-se los puede pasar a var y no tener que ser atritubtos
-end note
-
 ' Paquete: Entidades
 class Sesion <<entity>> {
     - fechaFin: DateTime
@@ -110,11 +104,11 @@ class Usuario <<entity>> {
 }
 
 class Empleado <<entity>> {
-    - nombre: string
-    - apellido: string
-    - mail: string
-    - telefono: int
-    - rol: Rol
+    nombre
+    apellido
+    mail
+    telefono
+    rol
     
 }
 
@@ -213,6 +207,7 @@ GestorCierreOI ..> Sismografo
 GestorCierreOI ..> MotivoTipo
 GestorCierreOI ..> EstadoOI
 GestorCierreOI ..> EstadoSismografo
+GestorCierreOI ..> Empleado
 Sesion --> "1 " Usuario
 Usuario --> "1   " Empleado
 Empleado --> "1 " Rol

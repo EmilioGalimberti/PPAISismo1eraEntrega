@@ -53,13 +53,13 @@
     <Compile Include="Entidades\EstadoOI.cs" />
     <Compile Include="Entidades\EstadoSismografo.cs" />
     <Compile Include="Entidades\MotivoFueraServicio.cs" />
+    <Compile Include="Entidades\MotivoTipo.cs" />
     <Compile Include="Entidades\OrdenDeInspeccion.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Sesion.cs" />
     <Compile Include="Entidades\Sismografo.cs" />
-    <Compile Include="Entidades\TipoMotivo.cs" />
     <Compile Include="Entidades\Usuario.cs" />
-    <Compile Include="Gestor\GestorCierreIO.cs" />
+    <Compile Include="Gestor\GestorCierreOI.cs" />
     <Compile Include="Interfaces\PantallaCierreOI.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PPAISismos.Entidades;
 
 namespace PPAISismos.Entidades
 {
@@ -14,7 +13,7 @@ namespace PPAISismos.Entidades
         private DateTime fechaHoraInicio;
         //CambioEstadoSismografo -> 1 EstadoSismografo
         EstadoSismografo estadoSismografo;
-        //CambioEstadoSismografo -> * MotivoFueraServicio
+        //CambioEstadoSismografo -> 0..* MotivoFueraServicio
         private List<MotivoFueraServicio> motivosFueraServicio;
 
         public CambioEstadoSismografo(DateTime? fechaHoraFin, DateTime fechaHoraInicio, EstadoSismografo estadoSismografo)
@@ -22,23 +21,43 @@ namespace PPAISismos.Entidades
             this.fechaHoraFin = fechaHoraFin;
             this.fechaHoraInicio = fechaHoraInicio;
             this.estadoSismografo = estadoSismografo;
-            this.motivosFueraServicio = new List<MotivoFueraServicio>();
+            this.motivosFueraServicio = new List<MotivoFueraServicio>(); // Siempre inicializada pero vacia
         }
 
         public bool esActual()
         {
-            return fechaHoraFin == null;
+            if (fechaHoraFin == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void setFechaHoraFin(DateTime fechaHoraFin)
+        public void setFehaFin(DateTime fechaHoraActual)
         {
-            this.fechaHoraFin = fechaHoraFin;
+            this.fechaHoraFin = fechaHoraActual;
         }
 
-        public void crearMotivoFueraServicio(string tipoMotivo, string comentario)
+        public void crearMotivosFueraServicio(List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
         {
-            MotivoFueraServicio motivo = new MotivoFueraServicio(tipoMotivo, comentario);
-            motivosFueraServicio.Add(motivo);
+            if (motivosSeleccionadosConComentarios == null)
+                return;
+
+            foreach (var (motivoTipo, comentario) in motivosSeleccionadosConComentarios)
+            {
+                var motivoFueraServicio = new MotivoFueraServicio(comentario, motivoTipo);
+                motivosFueraServicio.Add(motivoFueraServicio);
+            }
         }
+
+
+        //ESTO ES SOLO PARA PROBAR
+        public DateTime? getFechaHoraFin() => fechaHoraFin;
+        public DateTime getFechaHoraInicio() => fechaHoraInicio;
+        public EstadoSismografo getEstadoSismografo() => estadoSismografo;
+        public List<MotivoFueraServicio> getMotivosFueraServicio() => motivosFueraServicio;
     }
 }

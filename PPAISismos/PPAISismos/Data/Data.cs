@@ -44,22 +44,14 @@ namespace PPAISismos.Data
         public static EstacionSismologica Estacion2 { get; set; } = new EstacionSismologica(2, true, 000000002, 000000002, "Estacion2", 000000002);
         public static EstacionSismologica Estacion3 { get; set; } = new EstacionSismologica(3, true, 000000003, 000000003, "Estacion3", 000000003);
 
-        // Estados de OI 
-        public static EstadoOI CompletamenteRealizada { get; set; } = new EstadoOI("CompletamenteRealizada");
-        public static EstadoOI Cerrada { get; set; } = new EstadoOI("Cerrada");
-        public static EstadoOI PendienteDeRealizacion { get; set; } = new EstadoOI("PendienteDeRealizacion");
-        public static EstadoOI ParcialmenteRealizada { get; set; } = new EstadoOI("ParcialmenteRealizada");
-        
-        // Lista de estados de OI
-        public static List<EstadoOI> loadEstadosOI()
-        {
-            List<EstadoOI> listaEstadosOI = new List<EstadoOI>();
-            listaEstadosOI.Add(CompletamenteRealizada);
-            listaEstadosOI.Add(Cerrada);
-            listaEstadosOI.Add(PendienteDeRealizacion);
-            listaEstadosOI.Add(ParcialmenteRealizada);
-            return listaEstadosOI;
-        }
+        //EstadoOI 
+        public static EstadoOI EstadoOIRealizada { get; set; } = new EstadoOI("Realizada");
+        public static EstadoOI EstadoOICerrada { get; set; } = new EstadoOI("Cerrada");
+        public static EstadoOI EstadoOIPendienteDeRealizacion { get; set; } = new EstadoOI("PendienteDeRealizacion");
+        public static EstadoOI EstadoOIParcialmenteRealizada { get; set; } = new EstadoOI("ParcialmenteRealizada");
+  
+
+//hola
 
         // REVISAR EN EL DOMINIO LAS FECHAS
 
@@ -68,19 +60,17 @@ namespace PPAISismos.Data
         //fechaHoraInicio      | Al iniciar la inspección(Iniciar inspección de ES)
         //fechaHoraFinalizacion| Cuando se completan todas las tareas de la orden
         //fechaHoraCierre      | Cuando se cierra la orden de inspección (Cierre de OI)
-
-        //OrdenDeInspeccion (Empleado empleado, EstacionSismologica estacionSismologica, EstadoOI estadoOI, DateTime fechaHoraCierre, DateTime fechaHoraInicio, DateTime fechaHoraFinalizacion, int numeroOrden, string observacionCierre)
-        public static OrdenDeInspeccion Orden1 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 1, null);
-        public static OrdenDeInspeccion Orden2 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 6, 6), 2, null);
-        public static OrdenDeInspeccion Orden3 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 3, null);
-        public static OrdenDeInspeccion Orden4 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 4, null);
-        public static OrdenDeInspeccion Orden5 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, Cerrada, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), new DateTime(2025, 4, 5), 5, "Observacion2");
-        public static OrdenDeInspeccion Orden6 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 6, "Observacion3");
-        public static OrdenDeInspeccion Orden7 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 7, "Observacion4");
-        public static OrdenDeInspeccion Orden8 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion2, PendienteDeRealizacion, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 8, "Observacion5");
-        public static OrdenDeInspeccion Orden9 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, PendienteDeRealizacion, null, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), 9, null);
-        public static OrdenDeInspeccion Orden10 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, CompletamenteRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 9, 5), 10, null);
-     
+        //OrdenDeInspeccion(Empleado empleado,EstacionSismologica estacionSismologica,EstadoOI estadoOI,DateTime fechaHoraCierre,DateTime fechaHoraInicio,DateTime fechaHoraFinalizacion,int numeroOrden,string observacionCierre)
+        public static OrdenDeInspeccion Orden1 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, EstadoOIRealizada,null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 1, null);
+        public static OrdenDeInspeccion Orden2 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoOIRealizada, null , new DateTime(2025, 4, 5), new DateTime(2025, 6, 6), 2, null);
+        public static OrdenDeInspeccion Orden3 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoOIRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 3, null);
+        public static OrdenDeInspeccion Orden4 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoOIRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 4, null);
+        public static OrdenDeInspeccion Orden5 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion2, EstadoOICerrada, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), new DateTime(2025, 4, 5), 5, "Observacion2");
+        public static OrdenDeInspeccion Orden6 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, EstadoOICerrada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 6, "Observacion3");
+        public static OrdenDeInspeccion Orden7 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion1, EstadoOICerrada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 7, "Observacion4");
+        public static OrdenDeInspeccion Orden8 { get; set; } = new OrdenDeInspeccion(Empleado2, Estacion2, EstadoOICerrada, null, new DateTime(2025, 4, 5), new DateTime(2025, 5, 5), 8, "Observacion5");
+        public static OrdenDeInspeccion Orden9 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion1, EstadoOIRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), 9, null);
+        public static OrdenDeInspeccion Orden10 { get; set; } = new OrdenDeInspeccion(Empleado1, Estacion3, EstadoOIRealizada, null, new DateTime(2025, 4, 5), new DateTime(2025, 9, 5), 10, null);
         // Listas de ordenes para que el gestor las recorra
         public static List<OrdenDeInspeccion> loadOrdenesDeInspeccion() {     
             List<OrdenDeInspeccion> ordenes = new List<OrdenDeInspeccion>();
@@ -110,24 +100,8 @@ namespace PPAISismos.Data
         public static EstadoSismografo InhabilitadoPorInspeccion { get; set; } = new EstadoSismografo("InhabilitadoPorInspeccion");
         public static EstadoSismografo Reclamado { get; set; } = new EstadoSismografo("Reclamado");
         
-        // Lista de estados de sismógrafo
-        public static List<EstadoSismografo> loadEstadosSismografo()
-        {
-            List<EstadoSismografo> listaEstadosSismografo = new List<EstadoSismografo>();
-            listaEstadosSismografo.Add(EnEsperaDeCertificacion);
-            listaEstadosSismografo.Add(EnInstalacion);
-            listaEstadosSismografo.Add(EnLinea);
-            listaEstadosSismografo.Add(DeBaja);
-            listaEstadosSismografo.Add(Disponible);
-            listaEstadosSismografo.Add(FueraDeServicio);
-            listaEstadosSismografo.Add(HabilitadoASerIncluido);
-            listaEstadosSismografo.Add(IncluidoEnPlanDeConstruccion);
-            listaEstadosSismografo.Add(InhabilitadoPorInspeccion);
-            listaEstadosSismografo.Add(Reclamado);
-            return listaEstadosSismografo;
-        }
 
-        // Cambio de estado del sismógrafo (DateTime? fechaHoraFin, DateTime? fechaHoraInicio, EstadoSismografo estadoSismografo)
+        // Cambio de estado del sismógrafo (DateTime? fechaHoraFin, DateTime fechaHoraInicio, EstadoSismografo estadoSismografo)
         public static CambioEstadoSismografo ce1 = new CambioEstadoSismografo(null, new DateTime(2025, 5, 5), InhabilitadoPorInspeccion);
         public static CambioEstadoSismografo ce2 = new CambioEstadoSismografo(new DateTime(2025, 5, 5), new DateTime(2025, 4, 5), EnLinea);
         public static CambioEstadoSismografo ce3 = new CambioEstadoSismografo(new DateTime(2025, 4, 5), new DateTime(2025, 3, 5), EnInstalacion);
@@ -160,25 +134,49 @@ namespace PPAISismos.Data
             return listaSismografos;
         }
 
-        // Tipos de motivo
-        public static TipoMotivo AveriaPorVibracion { get; set; } = new TipoMotivo("AveriaPorVibracion");
-        public static TipoMotivo DesgasteDeComponente { get; set; } = new TipoMotivo("DesgasteDeComponente");
-        public static TipoMotivo FalloEnElSistemaDeRegistro { get; set; } = new TipoMotivo("FalloEnElSistemaDeRegistro");
-        public static TipoMotivo FalloEnFuenteDeAlimentacion { get; set; } = new TipoMotivo("FalloEnFuenteDeAlimentacion");
-        public static TipoMotivo Vandalismo { get; set; } = new TipoMotivo("Vandalismo");
-        public static TipoMotivo Otro { get; set; } = new TipoMotivo("Otro");
+        //Tipos motivos fuera de serivico
+        public static MotivoTipo tipoMotivoAveríaPorVibracion { get; set; } = new MotivoTipo("Averia por vibracion");
+        public static MotivoTipo tipoMotivoDesgasteDeComponente { get; set; } = new MotivoTipo("Desgaste de componente");
+        public static MotivoTipo tipoMotivoFalloEnElSistemadeRegistro { get; set; } = new MotivoTipo("Fallo en el sistema de registro");
+        public static MotivoTipo tipoMotivoVandalismo { get; set; } = new MotivoTipo("Vandalismo");
+        public static MotivoTipo tipoMotivoFalloEnLaFuenteDeAlimentacion { get; set; } = new MotivoTipo("Fallo en la fuente de alimentacion");
 
-        // Lista de tipos de motivo
-        public static List<TipoMotivo> loadTiposDeMotivo()
+        public static List<MotivoTipo> loadMotivosTipos()
         {
-            List<TipoMotivo> listaTiposDeMotivo = new List<TipoMotivo>();
-            listaTiposDeMotivo.Add(AveriaPorVibracion);
-            listaTiposDeMotivo.Add(DesgasteDeComponente);
-            listaTiposDeMotivo.Add(FalloEnElSistemaDeRegistro);
-            listaTiposDeMotivo.Add(FalloEnFuenteDeAlimentacion);
-            listaTiposDeMotivo.Add(Vandalismo);
-            listaTiposDeMotivo.Add(Otro);
-            return listaTiposDeMotivo;
+            List<MotivoTipo> listaMotivos = new List<MotivoTipo>();
+            listaMotivos.Add(tipoMotivoAveríaPorVibracion);
+            listaMotivos.Add(tipoMotivoDesgasteDeComponente);
+            listaMotivos.Add(tipoMotivoFalloEnElSistemadeRegistro);
+            listaMotivos.Add(tipoMotivoVandalismo);
+            listaMotivos.Add(tipoMotivoFalloEnLaFuenteDeAlimentacion);
+            return listaMotivos;
+        }
+
+        public static List<EstadoOI> loadListaEstadoOI()
+        {
+            List<EstadoOI> listaEstadoOI = new List<EstadoOI>();
+            listaEstadoOI.Add(EstadoOIRealizada);
+            listaEstadoOI.Add(EstadoOICerrada);
+            listaEstadoOI.Add(EstadoOIPendienteDeRealizacion);
+            listaEstadoOI.Add(EstadoOIParcialmenteRealizada);
+            return listaEstadoOI;
+        }
+
+
+        public static List<EstadoSismografo> loadListaEstadoSismografo()
+        {
+            List<EstadoSismografo> listaEstadoSismografo = new List<EstadoSismografo>();
+            listaEstadoSismografo.Add(EnEsperaDeCertificacion);
+            listaEstadoSismografo.Add(EnInstalacion);
+            listaEstadoSismografo.Add(EnLinea);
+            listaEstadoSismografo.Add(DeBaja);
+            listaEstadoSismografo.Add(Disponible);
+            listaEstadoSismografo.Add(FueraDeServicio);
+            listaEstadoSismografo.Add(HabilitadoASerIncluido);
+            listaEstadoSismografo.Add(IncluidoEnPlanDeConstruccion);
+            listaEstadoSismografo.Add(InhabilitadoPorInspeccion);
+            listaEstadoSismografo.Add(Reclamado);
+            return listaEstadoSismografo;
         }
     }
 }

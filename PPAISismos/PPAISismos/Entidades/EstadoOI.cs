@@ -14,20 +14,17 @@ namespace PPAISismos.Entidades
         {
             this.nombre = nombre;
         }
+   
+        public bool esRealizada() { return nombre == "Realizada"; }
+        public bool esCerrada() { return nombre == "Cerrada"; }
 
-        public bool esCerrada()
-        {
-            return nombre.Equals("Cerrada", StringComparison.OrdinalIgnoreCase);
-        }
 
-        public bool esRealizada()
-        {
-            return nombre.Equals("CompletamenteRealizada", StringComparison.OrdinalIgnoreCase);
-        }
-
+        //LO AGREGO PARA PROBAR QUE SE CAMBIE BIEN EL ESTADO AL CERRAR LA OI
+        //COMENTAR METODO
         public string getNombre()
         {
             return nombre;
         }
+
     }
 }

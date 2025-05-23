@@ -1,0 +1,258 @@
+@startuml
+
+skinparam sequenceParticipant underline
+
+actor       RI as ri
+boundary    ":PantallaCierreOI" as pantalla
+control     ":GestorCierreOI" as gestor
+entity      "actual:Sesion" as sesionActual
+entity      "logueado:Usuario" as usuarioLogueado
+entity      ":OrdenDeInspeccion"  as oi #orange
+entity      ":EstadoOI"       as estadoOI
+entity 	    ":EstacionSismologica" as es
+entity      ":Sismografo" as sismografo #orange
+
+
+entity	    "seleccionada:OrdenDeInspeccion" as oiSeleccionada
+
+entity      ":MotivoTipo" as tipoMotivo #orange
+
+entity	    ":EstadoOI" as estadosOI #orange
+
+entity      ":EstadoSismografo" as estadosSismografo #orange
+
+entity      "FueraServicio:EstadoSismografo" as estadoFueraServicio
+
+entity      "seleccionado:Sismografo" as sismografoSeleccionado
+
+entity	    ":CambioEstado" as cambioEstado #orange
+entity	    "actual:CambioEstado" as cambioEstadoActual
+
+entity      "nuevo:CambioEstado" as nuevoCambioEstado
+entity 	    ":MotivoFueraServicio" as motivoFueraSercio
+
+entity      ":Empleado" as empleado #orange
+entity      ":Rol" as rol
+
+boundary    ":InterfazMail" as interfazMail
+boundary    ":Monitor"  as monitor
+
+
+
+
+
+activate ri #white
+ri --> pantalla** : seleccionOpcionCerrarOI()
+activate pantalla #white
+
+pantalla -> pantalla : habilitarPantalla()
+activate pantalla #white
+deactivate pantalla 
+pantalla --> gestor ** : cerrarOI()
+activate gestor #white
+
+gestor -> gestor : obtenerEmpleado()
+activate gestor #white
+deactivate gestor 
+gestor -> sesionActual : getUsuario()
+activate sesionActual #white
+sesionActual -> usuarioLogueado : getEmpleado()
+activate usuarioLogueado #white
+deactivate sesionActual 
+deactivate usuarioLogueado
+
+gestor -> gestor : obtenerOrdenesRealizadasDeEmpleado()
+activate gestor #white
+deactivate gestor
+	loop mientras existan OI
+		gestor -> oi : esDeEmpleado()
+		activate oi #white
+		deactivate oi
+        	gestor -> oi : verificarOIRealizada()
+		activate oi #white
+		oi -> estadoOI : esRealizada()
+		activate estadoOI #white
+		deactivate oi
+		deactivate estadoOI
+		gestor -> oi : obtenerES()
+                activate oi #white
+		deactivate oi
+		gestor -> oi : getNombreES()
+                activate oi #white
+		oi -> es : getNombre()
+                activate es #white
+                deactivate oi
+                deactivate es
+		gestor -> oi : getNumeroOrden()
+                activate oi #white
+		deactivate oi
+		gestor -> oi : getFechaFinalizacion()
+                activate oi #white
+		deactivate oi
+        	loop mientras existan sismografos
+			gestor -> sismografo : esTuES()
+			activate sismografo #white
+		        deactivate sismografo
+			gestor -> sismografo : getIdentificador()
+			note right: ACA HAY QUE DECIDIR SI QUEDARNOS CON ESTA SOL O cambiar el nombre al metodo esTUES() y que nos devuelva el idettificador
+			activate sismografo #white
+			deactivate sismografo
+		end
+	end
+
+gestor -> gestor : ordenarListaOIPorFechaFinalizacion()
+activate gestor #white
+deactivate gestor
+
+gestor -> pantalla : solicitarSeleccionOI()
+deactivate gestor 
+deactivate pantalla 
+
+ri -> pantalla : ordenSeleccionada()
+activate pantalla #white
+pantalla -> gestor : tomarOrdenSeleccionada()
+activate gestor #white
+gestor -> pantalla : solicitarObservacion()
+deactivate gestor 
+deactivate pantalla 
+
+
+ri -> pantalla : observacionIngresada()
+activate pantalla #white
+
+pantalla -> gestor : tomarObservacion()
+activate gestor #white
+
+gestor -> gestor : buscarTipoMotivo()
+activate gestor #white
+deactivate gestor
+	loop mientras existan MotivoTipo
+		gestor -> tipoMotivo : getDescripcion()
+		activate tipoMotivo #white
+		deactivate tipoMotivo
+	end
+
+gestor -> pantalla: solicitarSeleccionTipoMotivo()
+deactivate gestor 
+deactivate pantalla 
+
+
+loop por cada motivo seleccionado
+    ri -> pantalla: seleccionTipoMotivo()
+   activate pantalla #white
+    pantalla -> pantalla: solicitarComentarioParaMotivoActual()
+    ri -> pantalla: ingresarComentario()
+    pantalla -> gestor: tomarMotivosYComentario()
+    activate gestor #white
+end
+
+gestor -> pantalla : solicitarConfimarcion()
+deactivate gestor 
+deactivate pantalla 
+
+ri -> pantalla : confirmar()
+activate pantalla #white
+pantalla -> gestor : tomarConfirmacion()
+activate gestor #white
+
+gestor -> gestor : validarDatosMinimos()
+activate gestor #white
+deactivate gestor
+
+gestor -> gestor : buscarEstadoOICerrada()
+activate gestor #white
+deactivate gestor
+loop mientras exitand estadosOI
+gestor -> estadosOI : esCerrada()
+activate estadosOI #white
+deactivate estadosOI
+end
+
+gestor -> gestor : getFechaHoraActual()
+activate gestor #white
+deactivate gestor
+gestor -> gestor : actualizarOrden()
+activate gestor #white
+deactivate gestor
+gestor -> oiSeleccionada : cerrarOI()
+activate oiSeleccionada #white
+deactivate oiSeleccionada
+
+gestor -> gestor : buscarEstadoSismografoFueraServicio()
+activate gestor #white
+deactivate gestor
+loop mientras existan estados Sismografo
+gestor -> estadosSismografo : esFueraServicio()
+activate estadosSismografo #white
+deactivate estadosSismografo
+end
+gestor -> estadoFueraServicio : getNombre()
+activate estadoFueraServicio #white
+deactivate estadoFueraServicio
+
+gestor -> gestor : ponerSismografoFueraServicio()
+activate gestor #white
+deactivate gestor
+gestor -> sismografoSeleccionado : ponerSismografoFueraServicio()
+activate sismografoSeleccionado #white
+
+sismografoSeleccionado -> sismografoSeleccionado : buscarCambioEstadoActual()
+activate sismografoSeleccionado #white
+deactivate sismografoSeleccionado
+loop mientras existan cambios de estado
+sismografoSeleccionado -> cambioEstado : esActual()
+activate cambioEstado #white
+deactivate cambioEstado
+end
+sismografoSeleccionado -> cambioEstadoActual : setFechaFin()
+activate cambioEstadoActual #white
+deactivate cambioEstadoActual
+
+sismografoSeleccionado --> nuevoCambioEstado** : new()
+activate nuevoCambioEstado #white
+
+deactivate sismografoSeleccionado
+
+nuevoCambioEstado -> nuevoCambioEstado : crearMotivosFueraServicio()
+activate nuevoCambioEstado #white
+deactivate nuevoCambioEstado
+
+loop mientras existan tipoMotivo
+nuevoCambioEstado --> motivoFueraSercio** : new()
+deactivate nuevoCambioEstado
+end
+
+gestor -> gestor : buscarMailResponsableEnReparacion()
+activate gestor #white
+deactivate gestor
+loop mientras existan Empleados
+gestor -> empleado : buscarResponasble()
+activate empleado #white
+empleado -> rol : esResponsable()
+activate rol #white
+deactivate empleado
+deactivate rol
+
+gestor -> empleado : getMail()
+activate empleado #white
+deactivate empleado
+end
+gestor -> gestor : notificarMail()
+activate gestor #white
+deactivate gestor
+gestor -> interfazMail : enviarMail()
+activate interfazMail #white
+
+
+gestor -> gestor : notificarMonitores()
+activate gestor #white
+deactivate gestor
+loop mientras haya monitores
+gestor --> monitor** : publicar()
+end
+
+gestor -> gestor : finCU()
+activate gestor #white
+deactivate gestor
+
+@enduml

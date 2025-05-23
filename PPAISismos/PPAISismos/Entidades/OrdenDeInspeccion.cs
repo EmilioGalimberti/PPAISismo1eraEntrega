@@ -34,11 +34,13 @@ namespace PPAISismos.Entidades
             this.numeroOrden = numeroOrden;
             this.observacionCierre = observacionCierre;
         }
-
-        //Solo para probar las ordenes
         public int getNumeroOrden()
         {
             return numeroOrden;       
+        }
+        public DateTime getFechaFinalizacion()
+        {
+            return fechaHoraFinalizacion;
         }
 
         //Para saber si tiene el puntero al empleado logueado
@@ -46,8 +48,6 @@ namespace PPAISismos.Entidades
         {
             return empleado == empleadoLogueado;
         }
-
-        //Revisar que se llame igual que en el diagrama de secuencia
         public bool verificarOIRealizada()
         {
            return estadoOI.esRealizada();
@@ -59,20 +59,32 @@ namespace PPAISismos.Entidades
             return estacionSismologica;
         }
 
-        public string getNombreEs()
+        public string getNombreES()
         {
             return estacionSismologica.getNombre();
         }
 
-        public DateTime getFechaFinalizacion()
-        {
-            return fechaHoraFinalizacion;
-        }
-
-        public void cerrarOrden(DateTime fechaHoraCierre, EstadoOI estadoCerrada)
+        //ACA DEBERIA SER CON SETERS EN VERDAD PERO PREGUNTAR SI LO DEJO ASI O LOS AGREGO Y SI LOS TENDRIA QUE AGREGAR EN EL DIAGRAMA DE SECUENCIA
+        public void cerrarOI(EstadoOI estadoCerrada,DateTime fechaHoraCierre, string observacion)
         {
             this.fechaHoraCierre = fechaHoraCierre;
             this.estadoOI = estadoCerrada;
+            this.observacionCierre = observacion;
         }
+
+
+
+
+
+        //ESTO ES SOLO PARA PROBAR QUE CAMBIE BIEN EL ESTADO AL CERRAR LA OI 
+        //COMENTAR ESTOS METODOS
+        public string getNombreEstadoOI()
+        {
+            return estadoOI != null ? estadoOI.getNombre() : null;
+        }
+        public DateTime? getFechaHoraCierre() => fechaHoraCierre;
+        public string getObservacionCierre() => observacionCierre;
     }
+
+
 }

@@ -30,36 +30,48 @@ namespace PPAISismos.Entidades
 
         public int getIdentificador() { return identificadoSismografo; }
 
-        private CambioEstadoSismografo buscarCambioEstadoActual()
+        public void ponerSismografoFueraServicio(EstadoSismografo estadoSismografo, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
         {
-            foreach (CambioEstadoSismografo cambioEstado in listaCambioEstadoSismografo)
+           CambioEstadoSismografo cambioEstadoActual = buscarCambioEstadoActual();
+            if(cambioEstadoActual != null)
+            {
+                cambioEstadoActual.setFehaFin(fechaHoraActual);
+
+                // Crear el nuevo cambio de estado actual
+                var nuevoCambioEstado = new CambioEstadoSismografo(
+                    null,                // fechaHoraFin (es actual, así que no tiene fin)
+                    fechaHoraActual,     // fechaHoraInicio
+                    estadoSismografo     // nuevo estado
+                );
+                // Crear y asociar los motivos fuera de servicio
+                nuevoCambioEstado.crearMotivosFueraServicio(motivosSeleccionadosConComentarios);
+
+
+                // Agregarlo a la lista
+                listaCambioEstadoSismografo.Add(nuevoCambioEstado);
+            }
+        }
+
+        public CambioEstadoSismografo buscarCambioEstadoActual()
+        {
+            foreach(var cambioEstado in listaCambioEstadoSismografo)
             {
                 if (cambioEstado.esActual())
                 {
                     return cambioEstado;
+                   
+                   
                 }
+
             }
             return null;
         }
 
-        private void cerrarCambioEstado(DateTime fechaHoraActual)
-        {
-            CambioEstadoSismografo cambioEstadoActual = buscarCambioEstadoActual();
-            if (cambioEstadoActual != null)
-            {
-                cambioEstadoActual.setFechaHoraFin(fechaHoraActual);
-            }
-        }
 
-        public void ponerFueraServicio(EstadoSismografo estadoFueraServicio, DateTime fechaHoraActual, List<(string tipoMotivo, string comentario)> tiposMotivoYComentarios)
+        //ESTO ES SOLO PARA PROBAR
+        public List<CambioEstadoSismografo> getListaCambioEstadoSismografo()
         {
-            cerrarCambioEstado(fechaHoraActual);
-            CambioEstadoSismografo nuevoCambioEstado = new CambioEstadoSismografo(null, fechaHoraActual, estadoFueraServicio);
-            foreach (var (tipoMotivo, comentario) in tiposMotivoYComentarios)
-            {
-                nuevoCambioEstado.crearMotivoFueraServicio(tipoMotivo, comentario);
-            }
-            listaCambioEstadoSismografo.Add(nuevoCambioEstado);
+            return listaCambioEstadoSismografo;
         }
     }
 }

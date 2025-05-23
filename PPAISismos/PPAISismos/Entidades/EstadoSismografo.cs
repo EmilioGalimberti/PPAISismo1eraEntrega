@@ -15,9 +15,13 @@ namespace PPAISismos.Entidades
             this.nombre = nombre;
         }
         
-        public bool esFueraServicio()
+        public bool esFueraServicio() { return nombre == "FueraDeServicio"; }
+
+
+        //ESTO ES SOLO PARA PROBAR
+        public string getNombre()
         {
-            return nombre.Equals("FueraDeServicio", StringComparison.OrdinalIgnoreCase);
+            return nombre;
         }
     }
 }

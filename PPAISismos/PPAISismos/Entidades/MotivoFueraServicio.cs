@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,18 @@ namespace PPAISismos.Entidades
 {
     public class MotivoFueraServicio
     {
-        private string tipoMotivo;
-        private string comentario;
+        string comentario;
+        MotivoTipo motivoTipo;
 
-        public MotivoFueraServicio(string tipoMotivo, string comentario)
+        public MotivoFueraServicio(string comentario, MotivoTipo motivoTipo)
         {
-            this.tipoMotivo = tipoMotivo;
             this.comentario = comentario;
+            this.motivoTipo = motivoTipo;
         }
+
+
+        //ESTO ES SOLO PARA PROBAR
+        public string getComentario() => comentario;
+        public MotivoTipo getMotivoTipo() => motivoTipo;
     }
-} 
+}

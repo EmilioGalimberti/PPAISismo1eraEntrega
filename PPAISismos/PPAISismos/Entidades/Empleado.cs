@@ -5,12 +5,12 @@ namespace PPAISismos.Entidades
     public class Empleado
     {
         //Atributos
-        private string nombre { get; set; }
-        private string apellido { get; set; }
-        private string mail { get; set; }
-        private int telefono { get; set; }
+        private string nombre;
+        private string apellido;
+        private string mail;
+        private int telefono;
         //Empleado ->1 Rol
-        private Rol rol { get; set; }
+        private Rol rol;
 
         //Constructor
         public Empleado(string nombre, string apellido, string mail,  int telefono,  Rol rol)
@@ -21,13 +21,5 @@ namespace PPAISismos.Entidades
             this.mail = mail;
             this.rol = rol;
         }
-        //Getters y Setters AGREGARLOS EN CASO DE SER UN METODO ESPECIFICO QUE SE USE EN EL DIAGRAMA DE SECUENCIA
-
-        //SOLO PARA PROBAR que la sesion tiene este empleado
-        public string getNombre()
-        {
-           return nombre;
-        }
-
     }
 }

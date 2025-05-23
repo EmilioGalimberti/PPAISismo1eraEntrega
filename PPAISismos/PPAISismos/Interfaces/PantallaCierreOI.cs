@@ -16,25 +16,33 @@ namespace PPAISismos.Interfaces
     public partial class PantallaCierreOI : Form
     {
         // Atributos: 
-        private GestorCierreIO gestorCerrarOI { get; set; }
-        
+        private GestorCierreOI gestorCerrarOI { get; set; }
+
+        //PARA PODER MANEJAR LOS INDICES CON LOS CHECKBOX
+        private List<int> indicesMotivosSeleccionados;
+        private int motivoActualIndex = 0;
+        private List<(int motivoIndex, string comentario)> motivosYComentarios = new List<(int, string)>();
+
         // Constructor de la pantalla
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
-            
+
 
         }
-        
+
+        //aca podria hacer un button pero PREGUNTAR
+
         private void seleccionOpcionCerrarOI()
         {
             InitializeComponent();
             habilitarPantalla();
         }
 
-        private void habilitarPantalla() {
+        private void habilitarPantalla()
+        {
             // Creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
-            gestorCerrarOI = new GestorCierreIO(this);
+            gestorCerrarOI = new GestorCierreOI(this);
             gestorCerrarOI.cerrarOI();
         }
 
@@ -79,7 +87,7 @@ namespace PPAISismos.Interfaces
 
         private void PantallaCierreOI_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dataGridOrdenes_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -112,139 +120,147 @@ namespace PPAISismos.Interfaces
         private void btnGuardarObservacion_Click(object sender, EventArgs e)
         {
             string observacion = textBoxObservaciones.Text;
-           
+
             if (string.IsNullOrEmpty(observacion))
             {
                 MessageBox.Show("Debe ingresar una observación antes de guardar.", "Observación requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxObservaciones.Focus();
                 return;
             }
-            // Deshabilitar controles para evitar más cambios
-            //ES PARA PROBAR NOMAS DESPUES VEMOS SI LO DEJAMOS O NO
-            //textBoxObservaciones.Enabled = false;
-            //btnGuardarObservacion.Enabled = false;
-            //dataGridOrdenes.Enabled = false;
+            
 
+
+            observacionIngresada(observacion);
+        }
+
+        private void observacionIngresada(string observacion)
+        {
             gestorCerrarOI.tomarObservacion(observacion);
         }
 
-        public void solicitarSeleccionTipoMotivo(List<string> descripciones)
+        //Para los TIPOS DE MOTIVOS
+        public void solicitarSeleccionTipoMotivo(List<string> motivos)
         {
-            // Configurar el ComboBox
-            comboBoxTiposMotivo.Items.Clear();
-            foreach (string descripcion in descripciones)
-            {
-                comboBoxTiposMotivo.Items.Add(descripcion);
-            }
-            
-            // Mostrar los controles
-            labelTipoMotivo.Visible = true;
-            comboBoxTiposMotivo.Visible = true;
-            btnSeleccionarTipoMotivo.Visible = true;
-            
-            // Configurar el label
-            labelTipoMotivo.Text = "Seleccione el tipo de motivo:";
+            labelMotivosFueraServicio.Visible = true;
+            checkedListBoxMotivos.Items.Clear();
+            foreach (var motivo in motivos)
+                checkedListBoxMotivos.Items.Add(motivo);
+
+            checkedListBoxMotivos.Visible = true;
+            buttonConfirmarMotivos.Visible = true;
         }
 
-        private void btnSeleccionarTipoMotivo_Click(object sender, EventArgs e)
+        // Evento del botón para confirmar selección de motivos
+        private void buttonConfirmarMotivos_Click(object sender, EventArgs e)
         {
-            if (comboBoxTiposMotivo.SelectedItem == null)
+            seleccionTipoMotivo();
+            
+        }
+
+        private void seleccionTipoMotivo()
+        {
+            // Guarda los índices de los motivos seleccionados
+            //Cuando el usuario confirma los motivos seleccionados (buttonConfirmarMotivos_Click), guardas los índices de los motivos seleccionados y reseteas el índice del motivo actual:
+            indicesMotivosSeleccionados = checkedListBoxMotivos.CheckedIndices.Cast<int>().ToList();
+            motivoActualIndex = 0;
+            motivosYComentarios.Clear();
+
+            if (indicesMotivosSeleccionados.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar un tipo de motivo.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar al menos un motivo.", "Motivo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string tipoMotivoSeleccionado = comboBoxTiposMotivo.SelectedItem.ToString();
-            gestorCerrarOI.tomarSeleccionTipoMotivo(tipoMotivoSeleccionado);
+            // Comienza el loop de comentarios
+            solicitarComentarioParaMotivoActual();
         }
 
-        public void solicitarComentario()
+        private void solicitarComentarioParaMotivoActual()
         {
-            // Mantener visibles los controles de tipo de motivo
-            labelTipoMotivo.Visible = true;
-            comboBoxTiposMotivo.Visible = true;
-            btnSeleccionarTipoMotivo.Visible = true;
-
-            // Mostrar controles de comentario
-            labelComentario.Visible = true;
-            textBoxComentario.Visible = true;
-            btnGuardarComentario.Visible = true;
-
-            // Configurar el label
-            labelComentario.Text = "Ingrese un comentario para el tipo de motivo seleccionado:";
             
-            // Limpiar el textbox de comentario
-            textBoxComentario.Clear();
+            if (motivoActualIndex < indicesMotivosSeleccionados.Count)
+            {
+                // Muestra el motivo actual y pide comentario
+                int idx = indicesMotivosSeleccionados[motivoActualIndex];
+                string motivoDescripcion = checkedListBoxMotivos.Items[idx].ToString();
+                labelComentario.Text = $"Ingrese un comentario para: {motivoDescripcion}";
+                labelComentario.Visible = true;
+                textBoxComentario.Visible = true;
+                btnGuardarComentario.Visible = true;
+                btnGuardarComentario.Enabled = true;
+                textBoxComentario.Text = "";
+                textBoxComentario.Focus();
+            }
+            else
+            {
+                // Cuando termina, envía la lista al gestor
+                // Fin del loop: envía la lista de motivos y comentarios al gestor
+                ingresarComentario(motivosYComentarios);
+                
+            }
+        }
+
+        private void ingresarComentario(List<(int motivoIndex, string comentario)> motivosYComentarios) {
+            gestorCerrarOI.tomarMotivosYComentarios(motivosYComentarios);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void btnGuardarComentario_Click(object sender, EventArgs e)
         {
-            string comentario = textBoxComentario.Text;
-           
+            string comentario = textBoxComentario.Text.Trim();
             if (string.IsNullOrEmpty(comentario))
             {
-                MessageBox.Show("Debe ingresar un comentario antes de guardar.", "Comentario requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxComentario.Focus();
+                MessageBox.Show("Debe ingresar un comentario.", "Comentario requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            gestorCerrarOI.tomarIngresoComentario(comentario);
             
-            // Preguntar si desea agregar otro tipo de motivo
-            DialogResult result = MessageBox.Show("¿Desea agregar otro tipo de motivo?", "Agregar tipo de motivo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            
-            if (result == DialogResult.Yes)
+            // Validar que el índice esté dentro del rango
+            if (motivoActualIndex < indicesMotivosSeleccionados.Count)
             {
-                // Limpiar y preparar para nuevo tipo de motivo
-                comboBoxTiposMotivo.SelectedIndex = -1;
-                textBoxComentario.Clear();
+                // Guarda el comentario junto al índice del motivo
+                //Cuando el usuario ingresa un comentario y presiona el botón, se guarda el comentario y se incrementa el índice:
+                motivosYComentarios.Add((indicesMotivosSeleccionados[motivoActualIndex], comentario));
+                motivoActualIndex++;
+                solicitarComentarioParaMotivoActual();
             }
             else
             {
-                // Ocultar todos los controles y solicitar confirmación de cierre
-                labelTipoMotivo.Visible = false;
-                comboBoxTiposMotivo.Visible = false;
-                btnSeleccionarTipoMotivo.Visible = false;
-                labelComentario.Visible = false;
-                textBoxComentario.Visible = false;
-                btnGuardarComentario.Visible = false;
-                
-                solicitarConfirmacionCierre();
+                // Ya no hay más motivos, puedes deshabilitar el botón o mostrar un mensaje
+                btnGuardarComentario.Enabled = false;
+                MessageBox.Show("Ya se ingresaron comentarios para todos los motivos seleccionados.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        public void solicitarConfirmacionCierre()
+        public void solicitarConfirmacion()
         {
-            // Ocultar controles de comentario
-            labelComentario.Visible = false;
-            textBoxComentario.Visible = false;
-            btnGuardarComentario.Visible = false;
+            
+            btnConfirmarCierreOI.Visible= true;
 
-            // Mostrar controles de confirmación
-            labelConfirmacion.Visible = true;
-            btnConfirmarCierre.Visible = true;
-            btnCancelarCierre.Visible = true;
-
-            // Configurar el label
-            labelConfirmacion.Text = "¿Desea confirmar el cierre de la orden de inspección?";
         }
 
-        private void btnConfirmarCierre_Click(object sender, EventArgs e)
+        private void btnConfirmarCierreOI_Click(object sender, EventArgs e)
         {
-            gestorCerrarOI.tomarConfirmacionCierre(true);
-            MessageBox.Show("Orden de inspección cerrada exitosamente.", "Cierre exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            //Podria agregar un warning que si confirma no va a poder editar nada mas
+            confirmar();
         }
 
-        private void btnCancelarCierre_Click(object sender, EventArgs e)
+        private void confirmar()
         {
-            gestorCerrarOI.tomarConfirmacionCierre(false);
-            MessageBox.Show("Cierre de orden de inspección cancelado.", "Operación cancelada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
-        }
+            // Deshabilitar controles para evitar más cambios
+            dataGridOrdenes.Enabled = false;
+            textBoxObservaciones.Enabled = false;
+            btnGuardarObservacion.Enabled = false;
+            checkedListBoxMotivos.Enabled = false;
+            buttonConfirmarMotivos.Enabled = false;
+            textBoxComentario.Enabled = false;
+            btnGuardarComentario.Enabled = false;
 
-        public string getTipoMotivoSeleccionado()
-        {
-            return comboBoxTiposMotivo.SelectedItem?.ToString() ?? string.Empty;
+            gestorCerrarOI.tomarConfirmacion();
+
         }
     }
 }

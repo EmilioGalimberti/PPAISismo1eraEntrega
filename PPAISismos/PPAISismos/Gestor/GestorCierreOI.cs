@@ -18,17 +18,13 @@ namespace PPAISismos.Gestor
         private Empleado empleadoLogueado;
         // Lista de ordenes de inspección (OI)
         private List<OrdenDeInspeccion> ordenesDeInspeccion;
-       
         // Estación sismológica (ES) de la OI
         private EstacionSismologica estacionSismologicaOI;
         private string nombreES;
         // Lista de sismógrafos
         private List<Sismografo> sismografos;
-       
-
         private int nroOrden;
         private DateTime fechaFinalizacionOrden;
-
         private int identificadorSismografo;
 
         // Para encontrar las oiDeEmpleado realizadas, Sismografo y nombreEstacion
@@ -93,7 +89,6 @@ namespace PPAISismos.Gestor
         public void cerrarOI()
         {
             empleadoLogueado = obtenerEmpleado();
-            // Console.WriteLine(empleadoLogueado.getNombre());
             obtenerOrdenesRealizadasDeEmpleado(empleadoLogueado);
             ordenarListaOIPorFechaFinalizacion();
             pantallaCierreOI.solicitarSeleccionOI(listaParaPantalla);
@@ -153,9 +148,6 @@ namespace PPAISismos.Gestor
             pantallaCierreOI.solicitarObservacion(ordenConAtributosSeleccionada.NumeroOrden);
 
         }
-
-       
-
         public void tomarObservacion(string observacion)
         {
             observacionIngresada = observacion;
@@ -181,21 +173,14 @@ namespace PPAISismos.Gestor
             {
                 MotivoTipo motivo = listaTipoMotivo[motivoIndex];
                 motivosSeleccionadosConComentarios.Add((motivo, comentario));
-                //Esto es para probar nomas
-                //Console.WriteLine($"Motivo: {motivo.getDescripcion()} (índice {motivoIndex}) - Comentario: {comentario}");
-                // Aquí puedes crear el MotivoFueraServicio, asociar el comentario, etc.
             }
             pantallaCierreOI.solicitarConfirmacion();
         }
-
-
-        //A ESTE HAY QUE HACERLE UN REFACTOR
 
         public void tomarConfirmacion()
         {
             if (validarDatosMinimos())
             {
-                //ESTO LO PODEMOS PASAR A QUE SEA UN ATTRIBUTO Y CAPAZ HASTA MEJOR
                 EstadoOI estadoOICerrada = buscarEstadoOICerrada();
                 getFechaHoraActual();
                 actualizarOrden(estadoOICerrada);
@@ -241,7 +226,7 @@ namespace PPAISismos.Gestor
 
                 }
             }
-            return null; // Si no se encuentra el estado, puedes manejarlo como desees
+            return null; 
 
         }
         public void getFechaHoraActual()
@@ -251,24 +236,8 @@ namespace PPAISismos.Gestor
 
         public void actualizarOrden(EstadoOI estadoOICerrada)
         {
-            //NO OLVIDARS DE DESPUES COMENTAR LOS METODOS DE LAS CLASES ESTAS PORQUE SOLO SON PARA PROBAR
-            //SOLO PARA PROBAR 
-            Console.WriteLine("ANTES DE CERRAR ORDEN:");
-            Console.WriteLine($"Estado: {ordenSeleccionada.Item1.getNombreEstadoOI()?.ToString() ?? "null"}");
-            Console.WriteLine($"FechaHoraCierre: {ordenSeleccionada.Item1.getFechaHoraCierre()?.ToString() ?? "null"}");
-            Console.WriteLine($"Observacion: {ordenSeleccionada.Item1.getObservacionCierre() ?? "null"}");
-
-
             //Actualizar la OI
             ordenSeleccionada.Item1.cerrarOI(estadoOICerrada, fechaHoraActual, observacionIngresada);
-
-            ////SOLO PARA PROBAR 
-            Console.WriteLine("DESPUÉS DE CERRAR ORDEN:");
-            Console.WriteLine($"Estado: {ordenSeleccionada.Item1.getNombreEstadoOI()?.ToString() ?? "null"}");
-            Console.WriteLine($"FechaHoraCierre: {ordenSeleccionada.Item1.getFechaHoraCierre()?.ToString() ?? "null"}");
-            Console.WriteLine($"Observacion: {ordenSeleccionada.Item1.getObservacionCierre() ?? "null"}");
-
-           
         }
 
         public EstadoSismografo buscarEstadoSismografoFueraServicio()
@@ -280,52 +249,15 @@ namespace PPAISismos.Gestor
                     return estadoSismografo;
                 }
             }
-            return null; // Si no se encuentra el estado, puedes manejarlo como desees
+            return null;
         }
         
         public void ponerSismografoFueraServicio(EstadoSismografo estadoSismografoFueraServicio)
         {
-            Console.WriteLine("PROBANDO CAMBIAR ESTO SISMOGRAFO");
-            //ESTO ES SOLO PARA PROBAR ANTES
-            mostrarCambioEstadoActual(ordenSeleccionada.Item2);
-            //ME OLVIDE DE PASARLE EL EMPLEADOOOOOO
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA // BORRÁ LOS MENSAJES SI YA ESTÁ SOLUCIONADO WACHO
             ordenSeleccionada.Item2.ponerSismografoFueraServicio(estadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, empleadoLogueado);
-            // ESTO ES SOLO PARA PROBAR EL DESPUES
-            mostrarCambioEstadoActual(ordenSeleccionada.Item2);
-        }
 
-        //ESTO ES SOLO PARA PROBAR
-        private void mostrarCambioEstadoActual(Sismografo sismografo)
-        {
-            var cambios = sismografo.getListaCambioEstadoSismografo();
-            var cambioActual = cambios.FirstOrDefault(c => c.getFechaHoraFin() == null);
-
-            if (cambioActual != null)
-            {
-                Console.WriteLine("----- Cambio de Estado Actual del Sismógrafo -----");
-                Console.WriteLine($"  Estado: {cambioActual.getEstadoSismografo()?.getNombre() ?? "null"}");
-                Console.WriteLine($"  Fecha Inicio: {cambioActual.getFechaHoraInicio()}");
-                Console.WriteLine($"  Fecha Fin: {cambioActual.getFechaHoraFin()?.ToString() ?? "null"}");
-                var motivos = cambioActual.getMotivosFueraServicio();
-                if (motivos != null && motivos.Count > 0)
-                {
-                    foreach (var motivo in motivos)
-                    {
-                        Console.WriteLine($"    Motivo: {motivo.getMotivoTipo().getDescripcion()} - Comentario: {motivo.getComentario()}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("    Sin motivos asociados.");
-                }
-                Console.WriteLine("---------------------------------");
-            }
-            else
-            {
-                Console.WriteLine("No hay cambio de estado actual (fecha fin == null) en el sismógrafo.");
-            }
         }
+       
 
         private List<string> buscarMailResponsableEnReparaciones()
         {

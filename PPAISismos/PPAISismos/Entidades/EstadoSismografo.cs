@@ -17,8 +17,6 @@ namespace PPAISismos.Entidades
         
         public bool esFueraServicio() { return nombre == "FueraDeServicio"; }
 
-
-        //ESTO ES SOLO PARA PROBAR
         public string getNombre()
         {
             return nombre;

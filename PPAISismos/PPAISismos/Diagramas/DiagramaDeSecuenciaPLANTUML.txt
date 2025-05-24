@@ -94,7 +94,6 @@ deactivate gestor
 			activate sismografo #white
 		        deactivate sismografo
 			gestor -> sismografo : getIdentificador()
-			note right: ACA HAY QUE DECIDIR SI QUEDARNOS CON ESTA SOL O cambiar el nombre al metodo esTUES() y que nos devuelva el idettificador
 			activate sismografo #white
 			deactivate sismografo
 		end
@@ -251,7 +250,8 @@ gestor -> gestor : notificarMonitores()
 activate gestor #white
 deactivate gestor
 loop mientras haya monitores
-gestor --> monitor** : publicar()
+gestor -> monitor : publicar()
+activate monitor #white
 end
 
 gestor -> gestor : finCU()

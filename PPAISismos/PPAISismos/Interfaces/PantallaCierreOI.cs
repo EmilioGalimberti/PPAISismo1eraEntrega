@@ -256,6 +256,7 @@ namespace PPAISismos.Interfaces
             buttonConfirmarMotivos.Enabled = false;
             textBoxComentario.Enabled = false;
             btnGuardarComentario.Enabled = false;
+            btnCancelar.Enabled = false;
 
             gestorCerrarOI.tomarConfirmacion();
 
@@ -263,7 +264,17 @@ namespace PPAISismos.Interfaces
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show(
+                "¿Está seguro que desea cancelar la operación? Se perderán los datos no guardados.",
+                "Confirmar cancelación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

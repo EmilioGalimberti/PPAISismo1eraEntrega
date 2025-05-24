@@ -16,7 +16,7 @@ namespace PPAISismos.Interfaces
         // Métodos:
         public static void publicar()
         {
-            // MessageBox.Show($"Publicación hecha.");
+            // MessageBox.Show($"Publicación hecha...");
         }
     }
 }

@@ -198,6 +198,7 @@ namespace PPAISismos.Gestor
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
                 var listaMails = buscarMailResponsableDeReparaciones();
+                generarNotificacion(int identificadoSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
                 notificarMail(listaMails);
                 notificarMonitores();
                 finCU();
@@ -285,7 +286,7 @@ namespace PPAISismos.Gestor
             //ESTO ES SOLO PARA PROBAR ANTES
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
             //ME OLVIDE DE PASARLE EL EMPLEADOOOOOO
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA // BORRÁ LOS MENSAJES SI YA ESTÁ SOLUCIONADO WACHO
             ordenSeleccionada.Item2.ponerSismografoFueraServicio(estadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, empleadoLogueado);
             // ESTO ES SOLO PARA PROBAR EL DESPUES
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
@@ -334,6 +335,12 @@ namespace PPAISismos.Gestor
                 }
             }
             return listaMails
+        }
+
+        // PARA MÍ TENDRÍA QUE IR UN GENERARNOTIFICACION()
+        private void generarNotificacion(int identificardorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
+        {
+            Console.WriteLine("Generando notificación...");
         }
 
         private void notificarMail(List<string> listaMails)

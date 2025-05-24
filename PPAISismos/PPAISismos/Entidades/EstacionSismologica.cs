@@ -9,7 +9,6 @@ namespace PPAISismos.Entidades
     public class EstacionSismologica
     {
         //Atributos
-        //VERIFICAR LOS TIPOS DE ATRIBUTOS
         private int codigoEstacion;
         private bool documentoCerificacionAdquirido;
         private int latitud;

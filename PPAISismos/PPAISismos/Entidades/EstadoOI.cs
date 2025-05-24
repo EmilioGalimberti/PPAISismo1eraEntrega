@@ -18,13 +18,5 @@ namespace PPAISismos.Entidades
         public bool esRealizada() { return nombre == "Realizada"; }
         public bool esCerrada() { return nombre == "Cerrada"; }
 
-
-        //LO AGREGO PARA PROBAR QUE SE CAMBIE BIEN EL ESTADO AL CERRAR LA OI
-        //COMENTAR METODO
-        public string getNombre()
-        {
-            return nombre;
-        }
-
     }
 }

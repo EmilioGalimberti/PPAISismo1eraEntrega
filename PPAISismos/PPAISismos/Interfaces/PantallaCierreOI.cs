@@ -27,8 +27,6 @@ namespace PPAISismos.Interfaces
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
-
-
         }
 
         //aca podria hacer un button pero PREGUNTAR
@@ -261,6 +259,11 @@ namespace PPAISismos.Interfaces
 
             gestorCerrarOI.tomarConfirmacion();
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

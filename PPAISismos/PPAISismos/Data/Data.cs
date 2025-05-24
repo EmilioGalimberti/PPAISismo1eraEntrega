@@ -16,13 +16,14 @@ namespace PPAISismos.Data
         public static Rol AnalistaEnSismos { get; set; } = new Rol("AnalistaEnSismos", "Descripcion2");
         public static Rol AnalistaSupervisor { get; set; } = new Rol("AnalistaSupervisor", "Descripcion3");
         public static Rol EncargadoDeInstalaciones { get; set; } = new Rol("EncargadoDeInstalaciones", "Descripcion4");
+        public static Rol ResponsableDeReparaciones { get; set; } = new Rol("ResponsableDeReparaciones", "Descripcion5");
         
         
         // Empleados (string nombre, string apellido, string mail, int telefono, Rol rol)
         public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "mail@gmail.com", 3891234 , ResponsableDeInspecciones);
         public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, ResponsableDeInspecciones);
         public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
-        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, EncargadoDeInstalaciones);
+        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, ResponsableDeReparaciones);
 
 
         // Usuario (string nombreUsuario, string contrasena, Empleado empleado)
@@ -178,5 +179,24 @@ namespace PPAISismos.Data
             listaEstadoSismografo.Add(Reclamado);
             return listaEstadoSismografo;
         }
+
+        public static InterfazMail InterfazMail { get; set; } = new InterfazMail();
+        public static Monitor Monitor1 { get; set; } = new Monitor();
+        public static Monitor Monitor2 { get; set; } = new Monitor();
+        public static Monitor Monitor3 { get; set; } = new Monitor();
+        public static Monitor Monitor4 { get; set; } = new Monitor();
+        public static Monitor Monitor5 { get; set; } = new Monitor();
+
+        public static List<Monitor> loadListaMonitores()
+        {
+            List<Monitor> listaMonitores = new List<Monitor>();
+            listaMonitores.Add(Monitor1);
+            listaMonitores.Add(Monitor2);
+            listaMonitores.Add(Monitor3);
+            listaMonitores.Add(Monitor4);
+            listaMonitores.Add(Monitor5);
+            return listaMonitores;
+        }
+        
     }
 }

@@ -40,6 +40,7 @@
             this.textBoxComentario = new System.Windows.Forms.TextBox();
             this.btnGuardarComentario = new System.Windows.Forms.Button();
             this.btnConfirmarCierreOI = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,12 +180,24 @@
             this.btnConfirmarCierreOI.Visible = false;
             this.btnConfirmarCierreOI.Click += new System.EventHandler(this.btnConfirmarCierreOI_Click);
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(700, 500); // Ajusta la posición según tu diseño
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(100, 30);
+            this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Visible = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // PantallaCierreOI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(967, 608);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConfirmarCierreOI);
             this.Controls.Add(this.btnGuardarComentario);
             this.Controls.Add(this.textBoxComentario);
@@ -204,7 +217,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrdenes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -221,5 +233,6 @@
         private System.Windows.Forms.TextBox textBoxComentario;
         private System.Windows.Forms.Button btnGuardarComentario;
         private System.Windows.Forms.Button btnConfirmarCierreOI;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

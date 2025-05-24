@@ -21,5 +21,15 @@ namespace PPAISismos.Entidades
             this.mail = mail;
             this.rol = rol;
         }
+
+        public bool buscarResponsable()
+        {
+            return rol.esResponsable();
+        }
+
+        public string getMail()
+        {
+            return mail;
+        }
     }
 }

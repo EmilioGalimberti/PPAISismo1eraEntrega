@@ -54,9 +54,13 @@ namespace PPAISismos.Gestor
         //Lista de estados sismografo
         List<EstadoSismografo> listaEstadosSismografo;
 
- 
         // nombre del estado FueraServicio del sismografo para luego pasrlso a a la notificacion OBERSVACION 2
         string nombreEstadoSismografoFueraServicio;
+
+        // Lista de empleados
+        List<Empleado> listaEmpleados;
+        // Lista de monitores
+        List<Monitor> listaMonitores;
 
         // Constructor del gestor
         public GestorCierreOI(PantallaCierreOI pantalla)
@@ -75,6 +79,8 @@ namespace PPAISismos.Gestor
             listaEstadosOI = Data.Data.loadListaEstadoOI();
             //cargar lista de estados sismografo
             listaEstadosSismografo = Data.Data.loadListaEstadoSismografo();
+            // Cargar lista de empleados
+            listaEmpleados = Data.Data.loadEmpleados();
         }
 
         public void cerrarOI()
@@ -191,9 +197,12 @@ namespace PPAISismos.Gestor
                 EstadoSismografo estadoSismografoFueraservicio = buscarEstadoSismografoFueraServicio();
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
+                var listaMails = buscarMailResponsableDeReparaciones();
+                notificarMail(listaMails);
+                notificarMonitores();
+                finCU();
 
-            }
-            else { 
+            } else { 
                 //NOTIFICAR A LA PANTALLA ESTO ES UN FLUJO ALTERNATIVO
                 Console.WriteLine("No se puede cerrar la OI, faltan datos.");
             }
@@ -203,11 +212,12 @@ namespace PPAISismos.Gestor
             if (!string.IsNullOrWhiteSpace(observacionIngresada)) {
                 if(motivosSeleccionadosConComentarios != null && motivosSeleccionadosConComentarios.Count > 0)
                 {
-                        return true;
+                    MessageBox.Show("Debe ingresar una observación de cierre.", "Falta observación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("No se seleccionó ningún motivo.");
+                    MessageBox.Show("Debe seleccionar al menos un tipo de motivo.", "Faltan motivos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
@@ -312,6 +322,39 @@ namespace PPAISismos.Gestor
                 Console.WriteLine("No hay cambio de estado actual (fecha fin == null) en el sismógrafo.");
             }
         }
-    }
 
+        private Lista<string> buscarMailResponsableDeReparaciones()
+        {
+            var listaMails = new List<string>();
+            foreach (Empleado empleado in listaEmpleados)
+            {
+                if (empleado.buscarResponsable())
+                {
+                    listaMails.Add(empleado.getMail());
+                }
+            }
+            return listaMails
+        }
+
+        private void notificarMail(List<string> listaMails)
+        {
+            foreach (string mail in listaMails)
+            {
+                InterfazMail.enviarMail(mail);
+            }
+        }
+
+        private void notificarMonitores()
+        {
+            foreach (Monitor monitor in listaMonitores)
+            {
+                monitor.publicar();
+            }
+        }
+
+        private void finCU()
+        {
+            pantallaCierreOI.Close();
+        }
+    }
 }

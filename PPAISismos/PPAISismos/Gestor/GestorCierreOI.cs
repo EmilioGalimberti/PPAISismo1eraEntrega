@@ -34,7 +34,11 @@ namespace PPAISismos.Gestor
 
         //OI SELECCIONADA
         private (OrdenDeInspeccion, Sismografo, string) ordenSeleccionada;
+        //los atributos de la oi seleccionada, ESto es para la pantalla
+        private (int NumeroOrden, DateTime FechaFinalizacion, string NombreEstacion, int IdentificadorSismografo) ordenConAtributosSeleccionada;
+
         private string observacionIngresada;
+
 
         //Lista de tipos motivos para mostrar en la pantalla de cierre
         private List<MotivoTipo> listaTipoMotivo;
@@ -143,7 +147,7 @@ namespace PPAISismos.Gestor
         public void tomarOrdenSeleccionada(int row) {
 
             ordenSeleccionada = ordenesRealizadasConSismografoYEstacion[row];
-            var ordenConAtributosSeleccionada = listaParaPantalla[row];
+            ordenConAtributosSeleccionada = listaParaPantalla[row];
             pantallaCierreOI.solicitarObservacion(ordenConAtributosSeleccionada.NumeroOrden);
 
         }
@@ -276,16 +280,17 @@ namespace PPAISismos.Gestor
         {
             foreach (string mail in listaMails)
             {
-                Console.Write(mail);
-                interfazMail.enviarMail(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, mail);
+                interfazMail.enviarMail(ordenConAtributosSeleccionada.IdentificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, mail);
             }
         }
 
         private void notificarMonitores()
         {
+            var i = 0;
             foreach (Monitor monitor in listaMonitores)
             {
-                monitor.publicar(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
+                i++;
+                monitor.publicar(i,ordenConAtributosSeleccionada.IdentificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
             }
         }
 

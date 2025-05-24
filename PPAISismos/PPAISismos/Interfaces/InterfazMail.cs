@@ -17,7 +17,13 @@ namespace PPAISismos.Interfaces
         // Métodos:
         public void enviarMail(int identificadorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios, string email)
         {
-            MessageBox.Show($"Correo enviado a {email}.");
+            MessageBox.Show($"Correo enviado a {email}.\n" +
+                            $"Sismógrafo: {identificadorSismografo}\n" +
+                            $"Estado: {nombreEstadoSismografoFueraServicio}\n" +
+                            $"Fecha y hora: {fechaHoraActual}\n" +
+                            $"Motivos:\n" +
+                            $"{string.Join("\n", motivosSeleccionadosConComentarios.Select(m => $"- {m.motivo.getDescripcion()}: {m.comentario}"))}"
+            );
         }
     }
 }

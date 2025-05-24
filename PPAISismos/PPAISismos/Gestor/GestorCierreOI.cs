@@ -38,7 +38,6 @@ namespace PPAISismos.Gestor
 
         //OI SELECCIONADA
         private (OrdenDeInspeccion, Sismografo, string) ordenSeleccionada;
-        private int numeroOrdenSeleccionada; // No se usa
         private string observacionIngresada;
 
         //Lista de tipos motivos para mostrar en la pantalla de cierre
@@ -48,22 +47,22 @@ namespace PPAISismos.Gestor
         List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios;
 
         //Lista de estados
-        List<EstadoOI> listaEstadosOI;
+        private List<EstadoOI> listaEstadosOI;
 
-        DateTime fechaHoraActual;
+        private DateTime fechaHoraActual;
 
         //Lista de estados sismografo
-        List<EstadoSismografo> listaEstadosSismografo;
+        private List<EstadoSismografo> listaEstadosSismografo;
 
         // nombre del estado FueraServicio del sismografo para luego pasrlso a a la notificacion OBERSVACION 2
-        string nombreEstadoSismografoFueraServicio;
+        private string nombreEstadoSismografoFueraServicio;
 
         // Lista de empleados
-        List<Empleado> listaEmpleados;
+        private List<Empleado> listaEmpleados;
         // Interfaz de correo
-        InterfazMail interfazMail;
+        private InterfazMail interfazMail;
         // Lista de monitores
-        List<Monitor> listaMonitores;
+        private List<Monitor> listaMonitores;
 
         // Constructor del gestor
         public GestorCierreOI(PantallaCierreOI pantalla)
@@ -96,7 +95,7 @@ namespace PPAISismos.Gestor
             empleadoLogueado = obtenerEmpleado();
             // Console.WriteLine(empleadoLogueado.getNombre());
             obtenerOrdenesRealizadasDeEmpleado(empleadoLogueado);
-
+            ordenarListaOIPorFechaFinalizacion();
             pantallaCierreOI.solicitarSeleccionOI(listaParaPantalla);
         }
         
@@ -130,8 +129,6 @@ namespace PPAISismos.Gestor
                     
                 }
             }
-            ordenarListaOIPorFechaFinalizacion();
-
         }
 
         public void ordenarListaOIPorFechaFinalizacion()
@@ -205,10 +202,9 @@ namespace PPAISismos.Gestor
                 EstadoSismografo estadoSismografoFueraservicio = buscarEstadoSismografoFueraServicio();
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
-                var listaMails = buscarMailResponsableDeReparaciones();
-                var notificacion = generarNotificacion(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
-                notificarMail(notificacion, listaMails);
-                notificarMonitores(notificacion);
+                var listaMails = buscarMailResponsableEnReparaciones();
+                notificarMail(listaMails);
+                notificarMonitores();
                 finCU();
 
             } else { 
@@ -331,7 +327,7 @@ namespace PPAISismos.Gestor
             }
         }
 
-        private List<string> buscarMailResponsableDeReparaciones()
+        private List<string> buscarMailResponsableEnReparaciones()
         {
             var listaMails = new List<string>();
             foreach (Empleado empleado in listaEmpleados)
@@ -344,26 +340,20 @@ namespace PPAISismos.Gestor
             return listaMails;
         }
 
-        // PARA MÍ TENDRÍA QUE IR UN GENERARNOTIFICACION()
-        private string generarNotificacion(int identificadorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
-        {
-            Console.WriteLine("Generando notificación...");
-            return "Imaginar que esto es una notificación";
-        }
-
-        private void notificarMail(string notificacionGenerada, List<string> listaMails)
+        private void notificarMail(List<string> listaMails)
         {
             foreach (string mail in listaMails)
             {
-                interfazMail.enviarMail(notificacionGenerada, mail);
+                Console.Write(mail);
+                interfazMail.enviarMail(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, mail);
             }
         }
 
-        private void notificarMonitores(string notificacionGenerada)
+        private void notificarMonitores()
         {
             foreach (Monitor monitor in listaMonitores)
             {
-                monitor.publicar(notificacionGenerada);
+                monitor.publicar(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
             }
         }
 

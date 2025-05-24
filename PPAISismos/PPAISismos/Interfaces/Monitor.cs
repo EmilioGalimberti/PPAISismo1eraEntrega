@@ -1,3 +1,4 @@
+using PPAISismos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,9 @@ namespace PPAISismos.Interfaces
     public class Monitor
     {
         // Métodos:
-        public void publicar(string notificacionGenerada)
+        public void publicar(int identificadorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivoTipo, string comentario)> motivosSeleccionadosConComentarios)
         {
-            // MessageBox.Show("Publicación hecha...");
+            MessageBox.Show("Publicación hecha...");
         }
     }
 }

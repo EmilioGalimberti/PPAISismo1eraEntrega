@@ -25,6 +25,7 @@ namespace PPAISismos.Data
         public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, ResponsableDeInspecciones);
         public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
         public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, ResponsableDeReparaciones);
+        public static Empleado Empleado5 { get; set; } = new Empleado("Arturo", "Illia", "mail5@gmail.com", 3891234, ResponsableDeReparaciones);
 
         // Lista de empleados para cargar en el gestor
         public static List<Empleado> loadEmpleados()
@@ -34,6 +35,7 @@ namespace PPAISismos.Data
             listaEmpleados.Add(Empleado2);
             listaEmpleados.Add(Empleado3);
             listaEmpleados.Add(Empleado4);
+            listaEmpleados.Add(Empleado5);
             return listaEmpleados;
         }
 

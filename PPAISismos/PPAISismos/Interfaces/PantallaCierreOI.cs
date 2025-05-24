@@ -125,9 +125,9 @@ namespace PPAISismos.Interfaces
                 textBoxObservaciones.Focus();
                 return;
             }
-            
-
-
+            textBoxObservaciones.Enabled = false;
+            btnGuardarObservacion.Enabled = false;
+            dataGridOrdenes.Enabled = false;
             observacionIngresada(observacion);
         }
 
@@ -152,7 +152,8 @@ namespace PPAISismos.Interfaces
         private void buttonConfirmarMotivos_Click(object sender, EventArgs e)
         {
             seleccionTipoMotivo();
-            
+            buttonConfirmarMotivos.Enabled = false;
+            checkedListBoxMotivos.Enabled = false;
         }
 
         private void seleccionTipoMotivo()

@@ -1,3 +1,4 @@
+using PPAISismos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,9 @@ namespace PPAISismos.Interfaces
     public class InterfazMail
     {
         // Métodos:
-        public void enviarMail(string notificacionGenerada, string email)
+        public void enviarMail(int identificadorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios, string email)
         {
-            // MessageBox.Show($"Correo enviado a {email}.");
+            MessageBox.Show($"Correo enviado a {email}.");
         }
     }
 }

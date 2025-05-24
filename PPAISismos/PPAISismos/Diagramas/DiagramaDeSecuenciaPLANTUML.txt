@@ -25,10 +25,10 @@ entity      "FueraServicio:EstadoSismografo" as estadoFueraServicio
 
 entity      "seleccionado:Sismografo" as sismografoSeleccionado
 
-entity	    ":CambioEstado" as cambioEstado #orange
-entity	    "actual:CambioEstado" as cambioEstadoActual
+entity	    ":CambioEstadoSismografo" as cambioEstado #orange
+entity	    "actual:CambioEstadoSismografo" as cambioEstadoActual
 
-entity      "nuevo:CambioEstado" as nuevoCambioEstado
+entity      "nuevo:CambioEstadoSismografo" as nuevoCambioEstado
 entity 	    ":MotivoFueraServicio" as motivoFueraSercio
 
 entity      ":Empleado" as empleado #orange
@@ -141,7 +141,7 @@ loop por cada motivo seleccionado
    activate pantalla #white
     pantalla -> pantalla: solicitarComentarioParaMotivoActual()
     ri -> pantalla: ingresarComentario()
-    pantalla -> gestor: tomarMotivosYComentario()
+    pantalla -> gestor: tomarMotivosYComentarios()
     activate gestor #white
 end
 

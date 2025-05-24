@@ -240,8 +240,11 @@ end
 gestor -> gestor : notificarMail()
 activate gestor #white
 deactivate gestor
+loop mientras existan mails
 gestor -> interfazMail : enviarMail()
 activate interfazMail #white
+
+end
 
 
 gestor -> gestor : notificarMonitores()

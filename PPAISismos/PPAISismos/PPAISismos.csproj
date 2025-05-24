@@ -60,6 +60,8 @@
     <Compile Include="Entidades\Sismografo.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Gestor\GestorCierreOI.cs" />
+    <Compile Include="Interfaces\InterfazMail.cs" />
+    <Compile Include="Interfaces\Monitor.cs" />
     <Compile Include="Interfaces\PantallaCierreOI.cs">
       <SubType>Form</SubType>
     </Compile>

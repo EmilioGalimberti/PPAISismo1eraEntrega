@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PPAISismos.Gestor
 {
@@ -28,7 +29,7 @@ namespace PPAISismos.Gestor
         private int nroOrden;
         private DateTime fechaFinalizacionOrden;
 
-        private int identificardorSismografo;
+        private int identificadorSismografo;
 
         // Para encontrar las oiDeEmpleado realizadas, Sismografo y nombreEstacion
         private List<(OrdenDeInspeccion, Sismografo, string)> ordenesRealizadasConSismografoYEstacion;
@@ -37,7 +38,6 @@ namespace PPAISismos.Gestor
 
         //OI SELECCIONADA
         private (OrdenDeInspeccion, Sismografo, string) ordenSeleccionada;
-        private int numeroOrdenSeleccionada;
         private string observacionIngresada;
 
         //Lista de tipos motivos para mostrar en la pantalla de cierre
@@ -47,16 +47,22 @@ namespace PPAISismos.Gestor
         List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios;
 
         //Lista de estados
-        List<EstadoOI> listaEstadosOI;
+        private List<EstadoOI> listaEstadosOI;
 
-        DateTime fechaHoraActual;
+        private DateTime fechaHoraActual;
 
         //Lista de estados sismografo
-        List<EstadoSismografo> listaEstadosSismografo;
+        private List<EstadoSismografo> listaEstadosSismografo;
 
- 
         // nombre del estado FueraServicio del sismografo para luego pasrlso a a la notificacion OBERSVACION 2
-        string nombreEstadoSismografoFueraServicio;
+        private string nombreEstadoSismografoFueraServicio;
+
+        // Lista de empleados
+        private List<Empleado> listaEmpleados;
+        // Interfaz de correo
+        private InterfazMail interfazMail;
+        // Lista de monitores
+        private List<Monitor> listaMonitores;
 
         // Constructor del gestor
         public GestorCierreOI(PantallaCierreOI pantalla)
@@ -75,6 +81,13 @@ namespace PPAISismos.Gestor
             listaEstadosOI = Data.Data.loadListaEstadoOI();
             //cargar lista de estados sismografo
             listaEstadosSismografo = Data.Data.loadListaEstadoSismografo();
+            // Cargar lista de empleados
+            listaEmpleados = Data.Data.loadEmpleados();
+            // Cargar lista de monitores
+            listaMonitores = Data.Data.loadListaMonitores();
+            // Cargar interfaz de correo
+            InterfazMail interfazMail = Data.Data.loadInterfazMail();
+            this.interfazMail = interfazMail;
         }
 
         public void cerrarOI()
@@ -82,7 +95,7 @@ namespace PPAISismos.Gestor
             empleadoLogueado = obtenerEmpleado();
             // Console.WriteLine(empleadoLogueado.getNombre());
             obtenerOrdenesRealizadasDeEmpleado(empleadoLogueado);
-
+            ordenarListaOIPorFechaFinalizacion();
             pantallaCierreOI.solicitarSeleccionOI(listaParaPantalla);
         }
         
@@ -108,16 +121,14 @@ namespace PPAISismos.Gestor
                     {
                         if (sismografo.esTuES(estacionSismologicaOI))
                         {
-                            identificardorSismografo = sismografo.getIdentificador();
+                            identificadorSismografo = sismografo.getIdentificador();
                             ordenesRealizadasConSismografoYEstacion.Add((oi, sismografo, nombreES));
-                            listaParaPantalla.Add((nroOrden, fechaFinalizacionOrden, nombreES, identificardorSismografo));
+                            listaParaPantalla.Add((nroOrden, fechaFinalizacionOrden, nombreES, identificadorSismografo));
                         }
                     }
                     
                 }
             }
-            ordenarListaOIPorFechaFinalizacion();
-
         }
 
         public void ordenarListaOIPorFechaFinalizacion()
@@ -191,9 +202,12 @@ namespace PPAISismos.Gestor
                 EstadoSismografo estadoSismografoFueraservicio = buscarEstadoSismografoFueraServicio();
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
+                var listaMails = buscarMailResponsableEnReparaciones();
+                notificarMail(listaMails);
+                notificarMonitores();
+                finCU();
 
-            }
-            else { 
+            } else { 
                 //NOTIFICAR A LA PANTALLA ESTO ES UN FLUJO ALTERNATIVO
                 Console.WriteLine("No se puede cerrar la OI, faltan datos.");
             }
@@ -203,16 +217,16 @@ namespace PPAISismos.Gestor
             if (!string.IsNullOrWhiteSpace(observacionIngresada)) {
                 if(motivosSeleccionadosConComentarios != null && motivosSeleccionadosConComentarios.Count > 0)
                 {
-                        return true;
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("No se seleccionó ningún motivo.");
+                    MessageBox.Show("Debe seleccionar al menos un tipo de motivo.", "Faltan motivos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
             else {                 
-                Console.WriteLine("La observación no puede estar vacía.");
+                MessageBox.Show("Debe ingresar una observación de cierre.", "Falta observación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -275,7 +289,7 @@ namespace PPAISismos.Gestor
             //ESTO ES SOLO PARA PROBAR ANTES
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
             //ME OLVIDE DE PASARLE EL EMPLEADOOOOOO
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA // BORRÁ LOS MENSAJES SI YA ESTÁ SOLUCIONADO WACHO
             ordenSeleccionada.Item2.ponerSismografoFueraServicio(estadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, empleadoLogueado);
             // ESTO ES SOLO PARA PROBAR EL DESPUES
             mostrarCambioEstadoActual(ordenSeleccionada.Item2);
@@ -312,6 +326,40 @@ namespace PPAISismos.Gestor
                 Console.WriteLine("No hay cambio de estado actual (fecha fin == null) en el sismógrafo.");
             }
         }
-    }
 
+        private List<string> buscarMailResponsableEnReparaciones()
+        {
+            var listaMails = new List<string>();
+            foreach (Empleado empleado in listaEmpleados)
+            {
+                if (empleado.buscarResponsable())
+                {
+                    listaMails.Add(empleado.getMail());
+                }
+            }
+            return listaMails;
+        }
+
+        private void notificarMail(List<string> listaMails)
+        {
+            foreach (string mail in listaMails)
+            {
+                Console.Write(mail);
+                interfazMail.enviarMail(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios, mail);
+            }
+        }
+
+        private void notificarMonitores()
+        {
+            foreach (Monitor monitor in listaMonitores)
+            {
+                monitor.publicar(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
+            }
+        }
+
+        private void finCU()
+        {
+            pantallaCierreOI.Close();
+        }
+    }
 }

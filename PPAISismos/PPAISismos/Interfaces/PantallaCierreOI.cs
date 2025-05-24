@@ -27,8 +27,6 @@ namespace PPAISismos.Interfaces
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
-
-
         }
 
         //aca podria hacer un button pero PREGUNTAR
@@ -127,9 +125,9 @@ namespace PPAISismos.Interfaces
                 textBoxObservaciones.Focus();
                 return;
             }
-            
-
-
+            textBoxObservaciones.Enabled = false;
+            btnGuardarObservacion.Enabled = false;
+            dataGridOrdenes.Enabled = false;
             observacionIngresada(observacion);
         }
 
@@ -154,7 +152,8 @@ namespace PPAISismos.Interfaces
         private void buttonConfirmarMotivos_Click(object sender, EventArgs e)
         {
             seleccionTipoMotivo();
-            
+            buttonConfirmarMotivos.Enabled = false;
+            checkedListBoxMotivos.Enabled = false;
         }
 
         private void seleccionTipoMotivo()
@@ -258,9 +257,25 @@ namespace PPAISismos.Interfaces
             buttonConfirmarMotivos.Enabled = false;
             textBoxComentario.Enabled = false;
             btnGuardarComentario.Enabled = false;
+            btnCancelar.Enabled = false;
 
             gestorCerrarOI.tomarConfirmacion();
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "¿Está seguro que desea cancelar la operación? Se perderán los datos no guardados.",
+                "Confirmar cancelación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

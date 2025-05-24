@@ -198,9 +198,9 @@ namespace PPAISismos.Gestor
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
                 var listaMails = buscarMailResponsableDeReparaciones();
-                generarNotificacion(int identificadoSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
-                notificarMail(listaMails);
-                notificarMonitores();
+                var notificacion = generarNotificacion(int identificadoSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
+                notificarMail(notificacion, listaMails);
+                notificarMonitores(notificacion);
                 finCU();
 
             } else { 
@@ -338,24 +338,25 @@ namespace PPAISismos.Gestor
         }
 
         // PARA MÍ TENDRÍA QUE IR UN GENERARNOTIFICACION()
-        private void generarNotificacion(int identificardorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
+        private string generarNotificacion(int identificardorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
         {
             Console.WriteLine("Generando notificación...");
+            return "Imaginar que esto es una notificación";
         }
 
-        private void notificarMail(List<string> listaMails)
+        private void notificarMail(string notificacionGenerada, List<string> listaMails)
         {
             foreach (string mail in listaMails)
             {
-                InterfazMail.enviarMail(mail);
+                InterfazMail.enviarMail(notificacionGenerada, mail);
             }
         }
 
-        private void notificarMonitores()
+        private void notificarMonitores(string notificacionGenerada)
         {
             foreach (Monitor monitor in listaMonitores)
             {
-                monitor.publicar();
+                monitor.publicar(notificacionGenerada);
             }
         }
 

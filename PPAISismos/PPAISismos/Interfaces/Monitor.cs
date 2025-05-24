@@ -14,9 +14,9 @@ namespace PPAISismos.Interfaces
     public class Monitor
     {
         // Métodos:
-        public static void publicar()
+        public static void publicar(string notificacionGenerada)
         {
-            // MessageBox.Show($"Publicación hecha...");
+            // MessageBox.Show("Publicación hecha...");
         }
     }
 }

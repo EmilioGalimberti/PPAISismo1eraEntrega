@@ -61,6 +61,12 @@
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Gestor\GestorCierreOI.cs" />
     <Compile Include="Interfaces\InterfazMail.cs" />
+    <Compile Include="Interfaces\menu\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\menu\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\Monitor.cs" />
     <Compile Include="Interfaces\PantallaCierreOI.cs">
       <SubType>Form</SubType>
@@ -70,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interfaces\menu\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\PantallaCierreOI.resx">
       <DependentUpon>PantallaCierreOI.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagramas\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using PPAISismos.Interfaces;
+using PPAISismos.Interfaces.menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace PPAISismos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaCierreOI());
+            Application.Run(new MenuPrincipal());
         }
     }
 }

@@ -38,7 +38,7 @@ namespace PPAISismos.Gestor
 
         //OI SELECCIONADA
         private (OrdenDeInspeccion, Sismografo, string) ordenSeleccionada;
-        private int numeroOrdenSeleccionada;
+        private int numeroOrdenSeleccionada; // No se usa
         private string observacionIngresada;
 
         //Lista de tipos motivos para mostrar en la pantalla de cierre
@@ -60,6 +60,8 @@ namespace PPAISismos.Gestor
 
         // Lista de empleados
         List<Empleado> listaEmpleados;
+        // Interfaz de correo
+        InterfazMail interfazMail;
         // Lista de monitores
         List<Monitor> listaMonitores;
 
@@ -82,6 +84,11 @@ namespace PPAISismos.Gestor
             listaEstadosSismografo = Data.Data.loadListaEstadoSismografo();
             // Cargar lista de empleados
             listaEmpleados = Data.Data.loadEmpleados();
+            // Cargar lista de monitores
+            listaMonitores = Data.Data.loadListaMonitores();
+            // Cargar interfaz de correo
+            InterfazMail interfazMail = Data.Data.loadInterfazMail();
+            this.interfazMail = interfazMail;
         }
 
         public void cerrarOI()
@@ -214,7 +221,6 @@ namespace PPAISismos.Gestor
             if (!string.IsNullOrWhiteSpace(observacionIngresada)) {
                 if(motivosSeleccionadosConComentarios != null && motivosSeleccionadosConComentarios.Count > 0)
                 {
-                    MessageBox.Show("Debe ingresar una observación de cierre.", "Falta observación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
                 else
@@ -224,7 +230,7 @@ namespace PPAISismos.Gestor
                 }
             }
             else {                 
-                Console.WriteLine("La observación no puede estar vacía.");
+                MessageBox.Show("Debe ingresar una observación de cierre.", "Falta observación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -349,7 +355,7 @@ namespace PPAISismos.Gestor
         {
             foreach (string mail in listaMails)
             {
-                InterfazMail.enviarMail(notificacionGenerada, mail);
+                interfazMail.enviarMail(notificacionGenerada, mail);
             }
         }
 

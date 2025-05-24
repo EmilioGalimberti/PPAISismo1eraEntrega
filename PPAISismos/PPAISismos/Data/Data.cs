@@ -193,6 +193,8 @@ namespace PPAISismos.Data
         }
 
         public static InterfazMail InterfazMail { get; set; } = new InterfazMail();
+        public static InterfazMail loadInterfazMail() { return InterfazMail; }
+
         public static Monitor Monitor1 { get; set; } = new Monitor();
         public static Monitor Monitor2 { get; set; } = new Monitor();
         public static Monitor Monitor3 { get; set; } = new Monitor();

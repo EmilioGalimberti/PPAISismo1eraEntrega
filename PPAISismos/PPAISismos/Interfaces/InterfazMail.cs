@@ -14,7 +14,7 @@ namespace PPAISismos.Interfaces
     public class InterfazMail
     {
         // Métodos:
-        public static void enviarMail(string notificacionGenerada, string email)
+        public void enviarMail(string notificacionGenerada, string email)
         {
             // MessageBox.Show($"Correo enviado a {email}.");
         }

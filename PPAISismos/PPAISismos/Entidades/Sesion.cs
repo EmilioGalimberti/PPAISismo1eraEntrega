@@ -24,7 +24,10 @@ namespace PPAISismos.Entidades
         }
 
         //--> Obtener el Empleado logueado
-        public Empleado getUsuario() { return usuarioLogueado.getEmpleado(); }
+        public Empleado getUsuario()
+        {
+            return usuarioLogueado.getEmpleado();
+        }
     }
 }
 

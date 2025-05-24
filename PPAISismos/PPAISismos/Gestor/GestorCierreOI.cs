@@ -121,7 +121,6 @@ namespace PPAISismos.Gestor
                             listaParaPantalla.Add((nroOrden, fechaFinalizacionOrden, nombreES, identificadorSismografo));
                         }
                     }
-                    
                 }
             }
         }
@@ -148,13 +147,15 @@ namespace PPAISismos.Gestor
             pantallaCierreOI.solicitarObservacion(ordenConAtributosSeleccionada.NumeroOrden);
 
         }
+
         public void tomarObservacion(string observacion)
         {
             observacionIngresada = observacion;
-            buscarTipoMotivo();
+            var listaDescipcionTipoMotivoParaPantalla = buscarTipoMotivo();
+            pantallaCierreOI.solicitarSeleccionTipoMotivo(listaDescipcionTipoMotivoParaPantalla);
         }
 
-        public void buscarTipoMotivo()
+        public List<string> buscarTipoMotivo()
         {
             var listaDescipcionTipoMotivoParaPantalla = new List<string>();
             foreach (MotivoTipo motivo in listaTipoMotivo)
@@ -162,7 +163,7 @@ namespace PPAISismos.Gestor
                 descripcionTipoMotivo = motivo.getDescripcion();
                 listaDescipcionTipoMotivoParaPantalla.Add(descripcionTipoMotivo);
             }
-            pantallaCierreOI.solicitarSeleccionTipoMotivo(listaDescipcionTipoMotivoParaPantalla);
+            return listaDescipcionTipoMotivoParaPantalla;
 
         }
 
@@ -191,7 +192,6 @@ namespace PPAISismos.Gestor
                 notificarMail(listaMails);
                 notificarMonitores();
                 finCU();
-
             } else { 
                 //NOTIFICAR A LA PANTALLA ESTO ES UN FLUJO ALTERNATIVO
                 Console.WriteLine("No se puede cerrar la OI, faltan datos.");

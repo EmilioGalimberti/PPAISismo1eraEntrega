@@ -1,4 +1,5 @@
 ﻿using PPAISismos.Entidades;
+using PPAISismos.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,17 @@ namespace PPAISismos.Data
         public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, ResponsableDeInspecciones);
         public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
         public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, ResponsableDeReparaciones);
+
+        // Lista de empleados para cargar en el gestor
+        public static List<Empleado> loadEmpleados()
+        {
+            List<Empleado> listaEmpleados = new List<Empleado>();
+            listaEmpleados.Add(Empleado1);
+            listaEmpleados.Add(Empleado2);
+            listaEmpleados.Add(Empleado3);
+            listaEmpleados.Add(Empleado4);
+            return listaEmpleados;
+        }
 
 
         // Usuario (string nombreUsuario, string contrasena, Empleado empleado)

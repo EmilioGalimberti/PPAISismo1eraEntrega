@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PPAISismos.Gestor
 {
@@ -28,7 +29,7 @@ namespace PPAISismos.Gestor
         private int nroOrden;
         private DateTime fechaFinalizacionOrden;
 
-        private int identificardorSismografo;
+        private int identificadorSismografo;
 
         // Para encontrar las oiDeEmpleado realizadas, Sismografo y nombreEstacion
         private List<(OrdenDeInspeccion, Sismografo, string)> ordenesRealizadasConSismografoYEstacion;
@@ -114,9 +115,9 @@ namespace PPAISismos.Gestor
                     {
                         if (sismografo.esTuES(estacionSismologicaOI))
                         {
-                            identificardorSismografo = sismografo.getIdentificador();
+                            identificadorSismografo = sismografo.getIdentificador();
                             ordenesRealizadasConSismografoYEstacion.Add((oi, sismografo, nombreES));
-                            listaParaPantalla.Add((nroOrden, fechaFinalizacionOrden, nombreES, identificardorSismografo));
+                            listaParaPantalla.Add((nroOrden, fechaFinalizacionOrden, nombreES, identificadorSismografo));
                         }
                     }
                     
@@ -198,7 +199,7 @@ namespace PPAISismos.Gestor
                 nombreEstadoSismografoFueraServicio = estadoSismografoFueraservicio.getNombre();
                 ponerSismografoFueraServicio(estadoSismografoFueraservicio);
                 var listaMails = buscarMailResponsableDeReparaciones();
-                var notificacion = generarNotificacion(int identificadoSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
+                var notificacion = generarNotificacion(identificadorSismografo, nombreEstadoSismografoFueraServicio, fechaHoraActual, motivosSeleccionadosConComentarios);
                 notificarMail(notificacion, listaMails);
                 notificarMonitores(notificacion);
                 finCU();
@@ -324,7 +325,7 @@ namespace PPAISismos.Gestor
             }
         }
 
-        private Lista<string> buscarMailResponsableDeReparaciones()
+        private List<string> buscarMailResponsableDeReparaciones()
         {
             var listaMails = new List<string>();
             foreach (Empleado empleado in listaEmpleados)
@@ -334,11 +335,11 @@ namespace PPAISismos.Gestor
                     listaMails.Add(empleado.getMail());
                 }
             }
-            return listaMails
+            return listaMails;
         }
 
         // PARA MÍ TENDRÍA QUE IR UN GENERARNOTIFICACION()
-        private string generarNotificacion(int identificardorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
+        private string generarNotificacion(int identificadorSismografo, string nombreEstadoSismografoFueraServicio, DateTime fechaHoraActual, List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios)
         {
             Console.WriteLine("Generando notificación...");
             return "Imaginar que esto es una notificación";

@@ -63,16 +63,9 @@ namespace PPAISismos.Entidades
                    
                    
                 }
-
             }
             return null;
         }
 
-
-        //ESTO ES SOLO PARA PROBAR
-        public List<CambioEstadoSismografo> getListaCambioEstadoSismografo()
-        {
-            return listaCambioEstadoSismografo;
-        }
     }
 }

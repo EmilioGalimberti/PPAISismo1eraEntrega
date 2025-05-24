@@ -17,9 +17,5 @@ namespace PPAISismos.Entidades
             this.motivoTipo = motivoTipo;
         }
 
-
-        //ESTO ES SOLO PARA PROBAR
-        public string getComentario() => comentario;
-        public MotivoTipo getMotivoTipo() => motivoTipo;
     }
 }

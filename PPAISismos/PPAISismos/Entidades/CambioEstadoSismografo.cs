@@ -55,12 +55,5 @@ namespace PPAISismos.Entidades
                 motivosFueraServicio.Add(motivoFueraServicio);
             }
         }
-
-
-        //ESTO ES SOLO PARA PROBAR
-        public DateTime? getFechaHoraFin() => fechaHoraFin;
-        public DateTime getFechaHoraInicio() => fechaHoraInicio;
-        public EstadoSismografo getEstadoSismografo() => estadoSismografo;
-        public List<MotivoFueraServicio> getMotivosFueraServicio() => motivosFueraServicio;
     }
 }

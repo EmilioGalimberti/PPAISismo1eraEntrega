@@ -12,45 +12,43 @@ using System.Windows.Forms;
 
 namespace PPAISismos.Interfaces
 {
-    // Clase que representa la pantalla de cierre de la orden de inspección (OI)
     public partial class PantallaCierreOI : Form
     {
-        // Atributos: 
+        // Atributos:
         private GestorCierreOI gestorCerrarOI { get; set; }
 
-        //PARA PODER MANEJAR LOS INDICES CON LOS CHECKBOX
+        // Para manejar los índices con los CheckBox...
         private List<int> indicesMotivosSeleccionados;
         private int motivoActualIndex = 0;
         private List<(int motivoIndex, string comentario)> motivosYComentarios = new List<(int, string)>();
 
-        // Constructor de la pantalla
+        // Métodos:
+        // Método constructor
         public PantallaCierreOI()
         {
             seleccionOpcionCerrarOI();
         }
 
-        //aca podria hacer un button pero PREGUNTAR
+        // Se podría poner un botón para entrar a la pantalla del CU
 
         private void seleccionOpcionCerrarOI()
         {
             InitializeComponent();
             habilitarPantalla();
-        }
-
-        private void habilitarPantalla()
-        {
-            // Creamos un gestor y le pasamos esta pantalla, para hacer la dependencia
             gestorCerrarOI = new GestorCierreOI(this);
             gestorCerrarOI.cerrarOI();
         }
 
-        // Método para solicitar la selección de la OI
+        private void habilitarPantalla()
+        {
+            dataGridOrdenes.Visible = true;
+        }
+
         public void solicitarSeleccionOI(List<(int NumeroOrden, DateTime FechaFinalizacion, string NombreEstacion, int IdentificadorSismografo)> lista)
         {
             dataGridOrdenes.Visible = true;
             dataGridOrdenes.Rows.Clear();
 
-            // Si no hay columnas definidas en el diseñador, las agregamos
             if (dataGridOrdenes.Columns.Count == 0)
             {
                 dataGridOrdenes.Columns.Add("NumeroOrden", "N° de Orden");
@@ -58,7 +56,6 @@ namespace PPAISismos.Interfaces
                 dataGridOrdenes.Columns.Add("NombreEstacion", "Nombre de la Estación Simológica");
                 dataGridOrdenes.Columns.Add("IdentificadorSismografo", "Identificador del Sismógrafo");
 
-                // Deshabilitar el ordenamiento en los headers
                 foreach (DataGridViewColumn col in dataGridOrdenes.Columns)
                 {
                     col.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -75,12 +72,10 @@ namespace PPAISismos.Interfaces
                 );
             }
 
-            //Esto es para que se ajuste el tamaño de la tabla a los datos
             dataGridOrdenes.AutoResizeColumns();
             dataGridOrdenes.AutoResizeRows();
             dataGridOrdenes.Width = dataGridOrdenes.PreferredSize.Width;
             dataGridOrdenes.Height = dataGridOrdenes.PreferredSize.Height;
-
         }
 
         private void PantallaCierreOI_Load(object sender, EventArgs e)
@@ -90,7 +85,7 @@ namespace PPAISismos.Interfaces
 
         private void dataGridOrdenes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Para evitar el header
+            if (e.RowIndex >= 0)
             {
                 ordenSeleccionada(e.RowIndex);
             }
@@ -103,7 +98,7 @@ namespace PPAISismos.Interfaces
             gestorCerrarOI.tomarOrdenSeleccionada(row);
         }
 
-        //Para la observacion de cierre
+        // Para la observacion de cierre
         public void solicitarObservacion(int numeroOrden)
         {
             //ACA PARA EL LABEL DE INGRESE UNA OBSERVACION LE PODRIA PEDIR QUE INGRESE UNA OBSERVACION y a que orden le estaria ingresando la observacion pero significaria pasarle la oi seleccionada
@@ -199,7 +194,7 @@ namespace PPAISismos.Interfaces
         }
 
         private void ingresarComentario(List<(int motivoIndex, string comentario)> motivosYComentarios) {
-            gestorCerrarOI.tomarMotivosYComentarios(motivosYComentarios);
+            gestorCerrarOI.tomarMotivosYComentarios(motivosYComentarios); // #CAMBIAR-DS
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

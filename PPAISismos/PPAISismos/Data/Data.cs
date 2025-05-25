@@ -13,20 +13,20 @@ namespace PPAISismos.Data
     {
         // Objetos :Rol
         // (string nombre, string descripcion)
-        public static Rol ResponsableDeInspecciones { get; set; } = new Rol("Responsable de Inspecciones", "Descripcion 1");
-        public static Rol AnalistaEnSismos { get; set; } = new Rol("Analista en Sismos", "Descripción 2");
-        public static Rol AnalistaSupervisor { get; set; } = new Rol("Analista Supervisor", "Descripción 3");
-        public static Rol EncargadoDeInstalaciones { get; set; } = new Rol("Encargado de Instalaciones", "Descripción 4");
-        public static Rol ResponsableDeReparaciones { get; set; } = new Rol("Responsable de Reparaciones", "Descripción 5");
+        public static Rol ResponsableDeInspecciones { get; set; } = new Rol("ResponsableDeInspecciones", "Descripcion1");
+        public static Rol AnalistaEnSismos { get; set; } = new Rol("AnalistaEnSismos", "Descripcion2");
+        public static Rol AnalistaSupervisor { get; set; } = new Rol("AnalistaSupervisor", "Descripcion3");
+        public static Rol EncargadoDeInstalaciones { get; set; } = new Rol("EncargadoDeInstalaciones", "Descripcion4");
+        public static Rol ResponsableDeReparaciones { get; set; } = new Rol("ResponsableDeReparaciones", "Descripcion5");
 
 
         // Objetos :Empleado
         // (string nombre, string apellido, string mail, int telefono, Rol rol)        
-        public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "german.velez@gmail.com", 3891234 , ResponsableDeInspecciones);
-        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "marcela.cattaneo@gmail.com", 3891234, ResponsableDeInspecciones);
-        public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "salvador.barbera@gmail.com", 3891234, AnalistaSupervisor);
-        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "federico.mizzau@gmail.com", 3891234, ResponsableDeReparaciones);
-        public static Empleado Empleado5 { get; set; } = new Empleado("Arturo", "Illia", "arturo.illia5@gmail.com", 3891234, ResponsableDeReparaciones);
+        public static Empleado Empleado1 { get; set; } = new Empleado("Germán", "Vélez", "mail@gmail.com", 3891234, ResponsableDeInspecciones);
+        public static Empleado Empleado2 { get; set; } = new Empleado("Marcela", "Cattaneo", "mail2@gmail.com", 3891234, ResponsableDeInspecciones);
+        public static Empleado Empleado3 { get; set; } = new Empleado("Salvador", "Barbera", "mail3@gmail.com", 3891234, AnalistaSupervisor);
+        public static Empleado Empleado4 { get; set; } = new Empleado("Federico", "Mizzau", "mail4@gmail.com", 3891234, ResponsableDeReparaciones);
+        public static Empleado Empleado5 { get; set; } = new Empleado("Arturo", "Illia", "mail5@gmail.com", 3891234, ResponsableDeReparaciones);
 
 
         // Objetos :Usuario

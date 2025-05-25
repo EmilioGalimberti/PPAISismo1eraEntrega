@@ -145,7 +145,7 @@ loop por cada motivo seleccionado
     activate gestor #white
 end
 
-gestor -> pantalla : solicitarConfimarcion()
+gestor -> pantalla : solicitarConfirmacion()
 deactivate gestor 
 deactivate pantalla 
 

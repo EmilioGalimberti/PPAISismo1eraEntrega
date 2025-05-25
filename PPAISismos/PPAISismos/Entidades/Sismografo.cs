@@ -13,16 +13,16 @@ namespace PPAISismos.Entidades
         private int nroSerie;
         //por ahora no le pongo una relacion directa del sismografo al estadoActual porque creo que no la usamos
         //Sismografo -> 1..* CambioEstadoSismografo
-        private List<CambioEstadoSismografo> listaCambioEstadoSismografo;
+        private List<CambioEstadoSismografo> cambiosDeEstadoSismografo;
         //Sismografo -> 1 EstacionSismologica
         private EstacionSismologica estacionSismologica;
 
-        public Sismografo(DateTime fechaAdquisicion, int identificadoSismografo, int nroSerie , List<CambioEstadoSismografo> listaCambioEstadoSismografo, EstacionSismologica estacionSismologica)
+        public Sismografo(DateTime fechaAdquisicion, int identificadoSismografo, int nroSerie , List<CambioEstadoSismografo> cambiosDeEstadoSismografo, EstacionSismologica estacionSismologica)
         {
             this.fechaAdquisicion = fechaAdquisicion;
             this.identificadoSismografo = identificadoSismografo;
             this.nroSerie = nroSerie;
-            this.listaCambioEstadoSismografo = listaCambioEstadoSismografo;
+            this.cambiosDeEstadoSismografo = cambiosDeEstadoSismografo;
             this.estacionSismologica = estacionSismologica;
         }
 
@@ -49,13 +49,13 @@ namespace PPAISismos.Entidades
 
 
                 // Agregarlo a la lista
-                listaCambioEstadoSismografo.Add(nuevoCambioEstado);
+                cambiosDeEstadoSismografo.Add(nuevoCambioEstado);
             }
         }
 
         public CambioEstadoSismografo buscarCambioEstadoActual()
         {
-            foreach(var cambioEstado in listaCambioEstadoSismografo)
+            foreach(var cambioEstado in cambiosDeEstadoSismografo)
             {
                 if (cambioEstado.esActual())
                 {

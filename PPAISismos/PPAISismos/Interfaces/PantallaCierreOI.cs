@@ -175,7 +175,7 @@ namespace PPAISismos.Interfaces
             {
                 // Muestra el motivo actual y pide comentario
                 int idx = indicesMotivosSeleccionados[motivoActualIndex];
-                string motivoDescripcion = checkedListBoxMotivos.Items[idx].ToString();
+                string motivoDescripcion = checkedListBoxMotivos.Items[idx].ToString(); // #CLAVE
                 labelComentario.Text = $"Ingrese un comentario para: {motivoDescripcion}";
                 labelComentario.Visible = true;
                 textBoxComentario.Visible = true;

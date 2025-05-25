@@ -15,8 +15,9 @@ namespace PPAISismos.Entidades
         private int longitud;
         private string nombre;
         private int nroCerficicacionAdquisicion;
+        private DateTime fechaSolicitudCertificacion;
 
-        public EstacionSismologica(int codigoEstacion, bool documentoCerificacionAdquirido, int latitud, int longitud, string nombre, int nroCerficicacionAdquisicion)
+        public EstacionSismologica(int codigoEstacion, bool documentoCerificacionAdquirido, int latitud, int longitud, string nombre, int nroCerficicacionAdquisicion, DateTime fechaSolicitudCertificacion)
         {
             this.codigoEstacion = codigoEstacion;
             this.documentoCerificacionAdquirido = documentoCerificacionAdquirido;
@@ -24,6 +25,8 @@ namespace PPAISismos.Entidades
             this.longitud = longitud;
             this.nombre = nombre;
             this.nroCerficicacionAdquisicion = nroCerficicacionAdquisicion;
+            this.fechaSolicitudCertificacion = fechaSolicitudCertificacion;
+            this.fechaSolicitudCertificacion = fechaSolicitudCertificacion;
         }
 
         public string getNombre()

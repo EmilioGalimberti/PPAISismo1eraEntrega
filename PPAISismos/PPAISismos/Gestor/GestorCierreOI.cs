@@ -43,6 +43,7 @@ namespace PPAISismos.Gestor
         //Lista de tipos motivos para mostrar en la pantalla de cierre
         private List<MotivoTipo> listaTipoMotivo;
         private string descripcionTipoMotivo;
+        private List<string> listaDescipcionTipoMotivoParaPantalla;
         //para guardarlos y dsp usarlo con el CE del sismografo
         List<(MotivoTipo motivo, string comentario)> motivosSeleccionadosConComentarios;
 
@@ -59,6 +60,8 @@ namespace PPAISismos.Gestor
 
         // Lista de empleados
         private List<Empleado> listaEmpleados;
+        // Lista de mails de responsables de reparaciones
+        private List<string> listaMails;
         // Interfaz de correo
         private InterfazMail interfazMail;
         // Lista de monitores
@@ -155,7 +158,7 @@ namespace PPAISismos.Gestor
         public void tomarObservacion(string observacion)
         {
             observacionIngresada = observacion;
-            var listaDescipcionTipoMotivoParaPantalla = buscarTipoMotivo();
+            listaDescipcionTipoMotivoParaPantalla = buscarTipoMotivo();
             pantallaCierreOI.solicitarSeleccionTipoMotivo(listaDescipcionTipoMotivoParaPantalla);
         }
 
@@ -171,7 +174,7 @@ namespace PPAISismos.Gestor
 
         }
 
-        public void tomarMotivosYComentarios(List<(int motivoIndex, string comentario)> motivosYComentarios)
+        public void tomarMotivosYComentarios(List<(int motivoIndex, string comentario)> motivosYComentarios) // #CLAVE
         {
             motivosSeleccionadosConComentarios = new List<(MotivoTipo, string)>();
             foreach (var (motivoIndex, comentario) in motivosYComentarios)
@@ -265,7 +268,7 @@ namespace PPAISismos.Gestor
 
         private List<string> buscarMailResponsableEnReparaciones()
         {
-            var listaMails = new List<string>();
+            listaMails = new List<string>();
             foreach (Empleado empleado in listaEmpleados)
             {
                 if (empleado.buscarResponsable())

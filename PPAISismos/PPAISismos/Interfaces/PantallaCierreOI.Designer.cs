@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaCierreOI));
             this.dataGridOrdenes = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelOrdenesDeInspeccion = new System.Windows.Forms.Label();
             this.textBoxObservaciones = new System.Windows.Forms.TextBox();
             this.labelObservacion = new System.Windows.Forms.Label();
             this.btnGuardarObservacion = new System.Windows.Forms.Button();
@@ -63,17 +63,17 @@
             this.dataGridOrdenes.TabIndex = 0;
             this.dataGridOrdenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridOrdenes_CellClick);
             // 
-            // label1
+            // labelOrdenesDeInspeccion
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(23, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(554, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tus Órdenes de Inspección Completamente Realizadas:";
+            this.labelOrdenesDeInspeccion.AutoSize = true;
+            this.labelOrdenesDeInspeccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOrdenesDeInspeccion.ForeColor = System.Drawing.Color.White;
+            this.labelOrdenesDeInspeccion.Location = new System.Drawing.Point(23, 23);
+            this.labelOrdenesDeInspeccion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelOrdenesDeInspeccion.Name = "labelOrdenesDeInspeccion";
+            this.labelOrdenesDeInspeccion.Size = new System.Drawing.Size(554, 25);
+            this.labelOrdenesDeInspeccion.TabIndex = 1;
+            this.labelOrdenesDeInspeccion.Text = "Tus Órdenes de Inspección Completamente Realizadas:";
             // 
             // textBoxObservaciones
             // 
@@ -226,7 +226,7 @@
             this.Controls.Add(this.btnGuardarObservacion);
             this.Controls.Add(this.labelObservacion);
             this.Controls.Add(this.textBoxObservaciones);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelOrdenesDeInspeccion);
             this.Controls.Add(this.dataGridOrdenes);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -242,7 +242,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridOrdenes;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelOrdenesDeInspeccion;
         private System.Windows.Forms.TextBox textBoxObservaciones;
         private System.Windows.Forms.Label labelObservacion;
         private System.Windows.Forms.Button btnGuardarObservacion;

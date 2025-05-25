@@ -59,10 +59,10 @@ namespace PPAISismos.Data
 
 
         // Objetos :EstacionSismologica
-        // (int codigoEstacion, bool documentoCertificacionAdquirido, int latitud, int longitud, string nombre, int nroCertificacionAdquisicion)
-        public static EstacionSismologica Estacion1 { get; set; } = new EstacionSismologica(1, true, 000000001, 000000001, "Estacion1", 000000001);
-        public static EstacionSismologica Estacion2 { get; set; } = new EstacionSismologica(2, true, 000000002, 000000002, "Estacion2", 000000002);
-        public static EstacionSismologica Estacion3 { get; set; } = new EstacionSismologica(3, true, 000000003, 000000003, "Estacion3", 000000003);
+        // (int codigoEstacion, bool documentoCertificacionAdquirido, int latitud, int longitud, string nombre, int nroCertificacionAdquisicion, DateTime fechaSolicitudCertificacion)
+        public static EstacionSismologica Estacion1 { get; set; } = new EstacionSismologica(1, true, 000000001, 000000001, "Estacion1", 000000001, new DateTime(2025, 4, 5));
+        public static EstacionSismologica Estacion2 { get; set; } = new EstacionSismologica(2, true, 000000002, 000000002, "Estacion2", 000000002, new DateTime(2025, 4, 5));
+        public static EstacionSismologica Estacion3 { get; set; } = new EstacionSismologica(3, true, 000000003, 000000003, "Estacion3", 000000003, new DateTime(2025, 4, 5));
 
 
         // Objetos :EstadoOI

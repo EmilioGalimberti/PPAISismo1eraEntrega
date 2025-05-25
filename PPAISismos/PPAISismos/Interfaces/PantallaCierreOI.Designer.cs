@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaCierreOI));
             this.dataGridOrdenes = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxObservaciones = new System.Windows.Forms.TextBox();
@@ -164,7 +165,7 @@
             this.textBoxComentario.Location = new System.Drawing.Point(686, 623);
             this.textBoxComentario.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxComentario.Name = "textBoxComentario";
-            this.textBoxComentario.Size = new System.Drawing.Size(550, 30);
+            this.textBoxComentario.Size = new System.Drawing.Size(550, 22);
             this.textBoxComentario.TabIndex = 10;
             this.textBoxComentario.Visible = false;
             this.textBoxComentario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -227,6 +228,7 @@
             this.Controls.Add(this.textBoxObservaciones);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridOrdenes);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PantallaCierreOI";
             this.Text = "Dar Cierre a Orden de Inspección de Estación Sismológica";

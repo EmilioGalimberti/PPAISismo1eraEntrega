@@ -27,5 +27,10 @@ namespace PPAISismos.Interfaces.menu
             PantallaCierreOI ventana = new PantallaCierreOI();
             ventana.ShowDialog();
         }
+
+        private void titulo1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

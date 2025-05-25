@@ -36,8 +36,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ordenesDeInspeccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarOrdenDeInspeccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // titulo1
@@ -45,11 +47,12 @@
             this.titulo1.AutoSize = true;
             this.titulo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titulo1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.titulo1.Location = new System.Drawing.Point(260, 66);
+            this.titulo1.Location = new System.Drawing.Point(193, 101);
             this.titulo1.Name = "titulo1";
-            this.titulo1.Size = new System.Drawing.Size(217, 24);
+            this.titulo1.Size = new System.Drawing.Size(363, 24);
             this.titulo1.TabIndex = 0;
-            this.titulo1.Text = "Observatorio Nacional";
+            this.titulo1.Text = "Observatorio Nacional: Red Sísmica   ";
+            this.titulo1.Click += new System.EventHandler(this.titulo1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -94,12 +97,23 @@
             this.cerrarOrdenDeInspeccionToolStripMenuItem1.Text = "Cerrar orden de inspeccion";
             this.cerrarOrdenDeInspeccionToolStripMenuItem1.Click += new System.EventHandler(this.cerrarOrdenDeInspeccionToolStripMenuItem1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PPAISismos.Properties.Resources.Screenshot_2025_05_25_145349;
+            this.pictureBox1.Location = new System.Drawing.Point(197, 128);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(396, 199);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.titulo1);
             this.MainMenuStrip = this.menuStrip1;
@@ -109,6 +123,7 @@
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +138,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ordenesDeInspeccionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarOrdenDeInspeccionToolStripMenuItem1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

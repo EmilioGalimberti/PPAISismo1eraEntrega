@@ -20,9 +20,9 @@ namespace PPAISismos.Interfaces
             MessageBox.Show($"Correo enviado a {email}.\n" +
                             $"Sismógrafo: {identificadorSismografo}\n" +
                             $"Estado: {nombreEstadoSismografoFueraServicio}\n" +
-                            $"Fecha y hora: {fechaHoraActual}\n" +
-                            $"Motivos:\n" +
-                            $"{string.Join("\n", motivosSeleccionadosConComentarios.Select(m => $"- {m.motivo.getDescripcion()}: {m.comentario}"))}"
+                            $"Fecha y hora: {fechaHoraActual}\n" 
+                            //$"Motivos:\n" +
+                            //$"{string.Join("\n", motivosSeleccionadosConComentarios.Select(m => $"- {m.motivo.To}: {m.comentario}"))}"
             );
         }
     }

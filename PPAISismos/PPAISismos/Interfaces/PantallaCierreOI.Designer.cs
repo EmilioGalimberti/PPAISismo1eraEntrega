@@ -164,7 +164,7 @@
             this.textBoxComentario.Location = new System.Drawing.Point(686, 623);
             this.textBoxComentario.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxComentario.Name = "textBoxComentario";
-            this.textBoxComentario.Size = new System.Drawing.Size(550, 30);
+            this.textBoxComentario.Size = new System.Drawing.Size(550, 22);
             this.textBoxComentario.TabIndex = 10;
             this.textBoxComentario.Visible = false;
             this.textBoxComentario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -185,7 +185,7 @@
             // 
             this.btnConfirmarCierreOI.BackColor = System.Drawing.Color.Green;
             this.btnConfirmarCierreOI.ForeColor = System.Drawing.Color.White;
-            this.btnConfirmarCierreOI.Location = new System.Drawing.Point(1029, 957);
+            this.btnConfirmarCierreOI.Location = new System.Drawing.Point(942, 739);
             this.btnConfirmarCierreOI.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmarCierreOI.Name = "btnConfirmarCierreOI";
             this.btnConfirmarCierreOI.Size = new System.Drawing.Size(150, 30);
@@ -199,7 +199,7 @@
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Red;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(1187, 957);
+            this.btnCancelar.Location = new System.Drawing.Point(1136, 739);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 30);
